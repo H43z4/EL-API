@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DatabaseModels\Identity\**" />
+    <Compile Remove="DatabaseModels\VehicleRegistration\Temp\**" />
+    <EmbeddedResource Remove="DatabaseModels\Identity\**" />
+    <EmbeddedResource Remove="DatabaseModels\VehicleRegistration\Temp\**" />
+    <None Remove="DatabaseModels\Identity\**" />
+    <None Remove="DatabaseModels\VehicleRegistration\Temp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DatabaseModels\Admin\" />
+  </ItemGroup>
+
+</Project>
