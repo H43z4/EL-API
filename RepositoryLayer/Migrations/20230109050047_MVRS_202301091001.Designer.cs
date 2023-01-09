@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepositoryLayer;
 
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230109050047_MVRS_202301091001")]
+    partial class MVRS_202301091001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +61,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("GRightId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("GlobalRight");
                 });
@@ -119,6 +125,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ControllerId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("ResourceTypeId");
 
                     b.ToTable("Resource");
@@ -152,6 +162,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("ResourceActionId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("ResourceAction");
                 });
 
@@ -182,6 +196,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("ResourceControllerId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("ResourceController");
                 });
@@ -224,6 +242,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("ResourceTypeId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("ResourceType");
                 });
 
@@ -256,7 +278,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DefaultRTRightId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("RTRightId");
 
@@ -310,7 +336,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("RTRightId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("GRightId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("ResourceTypeId");
 
@@ -355,6 +385,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("RoleId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("Role");
                 });
 
@@ -389,6 +423,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("AppProcessFlowId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("RoleId");
 
                     b.ToTable("RoleAppProcessFlow");
@@ -422,6 +460,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("RoleResourceId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("ResourceId");
 
@@ -459,6 +501,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("RTRightId");
 
                     b.HasIndex("RoleResourceId");
@@ -494,6 +540,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("RoleRightsHistoryId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("ResourceId");
 
@@ -553,6 +603,17 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("ModifiedBy")
+                        .IsUnique()
+                        .HasFilter("[ModifiedBy] IS NOT NULL");
+
+                    b.HasIndex("UserStatusId")
+                        .IsUnique();
+
+                    b.HasIndex("UserTypeId")
+                        .IsUnique()
+                        .HasFilter("[UserTypeId] IS NOT NULL");
+
                     b.ToTable("User");
                 });
 
@@ -590,6 +651,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("UserRoleId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("RoleId");
 
@@ -630,6 +695,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("UserRoleHistoryId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("RoleId");
 
@@ -676,6 +745,8 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("UserStatus");
                 });
 
@@ -716,6 +787,8 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("UserType");
                 });
@@ -772,6 +845,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("NadraFranchiseId");
 
                     b.HasIndex("OwnerGroupId");
@@ -818,6 +895,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("NadraFranchiseId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("NadraFranchise");
                 });
@@ -881,6 +962,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("HttpRequestLog");
                 });
 
@@ -932,6 +1017,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("SqlExceptionLog");
                 });
 
@@ -956,7 +1045,7 @@ namespace RepositoryLayer.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CountryId")
+                    b.Property<long>("CountryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -981,22 +1070,26 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Nationality")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PassportNo")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PersonName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("VisaExpiryDate")
+                    b.Property<DateTime>("VisaExpiryDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PersonId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("EPRSPerson", "Core");
                 });
@@ -1041,6 +1134,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("PermitApplicationDetail", "Core");
                 });
 
@@ -1051,10 +1148,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("ApplicationStatusId")
+                    b.Property<long>("ApplicationStatusId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("BioStatus")
+                    b.Property<long>("BioStatus")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -1074,13 +1171,13 @@ namespace RepositoryLayer.Migrations
                     b.Property<long?>("ModifiedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("OldPermitNo")
+                    b.Property<long>("OldPermitNo")
                         .HasColumnType("bigint");
 
                     b.Property<long>("PermitNo")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("PermitStatus")
+                    b.Property<long>("PermitStatus")
                         .HasColumnType("bigint");
 
                     b.Property<long>("PermitTypeId")
@@ -1093,6 +1190,14 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("ApplicationId");
+
+                    b.HasIndex("ApplicationStatusId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("PermitTypeId");
 
@@ -1163,6 +1268,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("StockInApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("StockInApplication", "Core");
                 });
 
@@ -1210,50 +1319,13 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("ApplicationDetailId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("StockInApplicationId");
 
                     b.ToTable("StockInApplicationDetails", "Core");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Setup.EPRSOrganization", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EPRSOrganization", "Setup");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Setup.EPRSPermitTypes", b =>
@@ -1294,109 +1366,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("EPRSPermitTypes", "Setup");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Setup.EPRSRole", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EPRSRole", "Setup");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Setup.EPRSUser", b =>
-                {
-                    b.Property<long>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CellNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Designation")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("OrganizationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("SuperVisorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<long>("UserStatusId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("EPRSUser", "Setup");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.AuctionResult", b =>
@@ -1474,6 +1448,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("AuctionResultId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("SeriesCategoryId");
 
                     b.HasIndex("SeriesId");
@@ -1518,6 +1496,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("SeriesId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("SeriesCategoryId");
 
@@ -1566,6 +1548,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("SeriesCategory");
                 });
 
@@ -1594,6 +1580,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SeriesNumberId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("SeriesNumber");
                 });
@@ -1658,7 +1648,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("SeriesNumberPoolId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("SeriesCategoryId");
 
@@ -1709,6 +1703,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("SeriesNumberStatus");
                 });
 
@@ -1750,6 +1748,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("SeriesStatus");
                 });
 
@@ -1790,6 +1792,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("SeriesType");
                 });
@@ -1850,7 +1856,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("PersonId");
 
@@ -1917,7 +1927,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessProcessId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerId");
 
@@ -2064,7 +2078,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessProcessId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerId");
 
@@ -2124,6 +2142,10 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("AssessmentDetailId");
 
                     b.HasIndex("AssessmentBaseId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("TaxTypeId");
 
@@ -2197,6 +2219,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessTypeId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("Business");
                 });
 
@@ -2246,6 +2272,10 @@ namespace RepositoryLayer.Migrations
                     b.HasIndex("BusinessId");
 
                     b.HasIndex("BusinessRepStatusId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("PersonId");
 
@@ -2298,6 +2328,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ChallanTypeId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("Challan");
                 });
 
@@ -2332,6 +2366,10 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("DealerId");
 
                     b.HasIndex("BusinessId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("Dealer");
                 });
@@ -2400,7 +2438,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("HPACurrentStatusId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerId");
 
@@ -2448,9 +2490,13 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("HPAId");
 
                     b.HasIndex("HPAStatusId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("HPAStatusHistory");
                 });
@@ -2487,7 +2533,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("KeeperId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("KeeperPersonId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerId");
 
@@ -2524,6 +2574,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("OwnerId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerTaxGroupId");
 
@@ -2568,6 +2622,10 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("OwnerGroupId");
 
                     b.HasIndex("BusinessId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerId");
 
@@ -2626,6 +2684,10 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("PaymentInfoId");
 
                     b.HasIndex("ChallanId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("PaymentModeId");
 
@@ -2692,6 +2754,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("Person");
                 });
 
@@ -2738,6 +2804,10 @@ namespace RepositoryLayer.Migrations
                     b.HasIndex("BusinessId");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("PersonId");
 
@@ -2790,6 +2860,10 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("RemarksId");
 
                     b.HasIndex("ApplicationId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerGroupId");
 
@@ -2924,6 +2998,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("VehicleId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("RegistrationDistrictId");
@@ -3020,6 +3098,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("VehicleAdditionalInfoId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("VehicleId");
 
                     b.HasIndex("VehicleRCStatusId");
@@ -3081,6 +3163,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("VehicleId");
 
                     b.ToTable("VehicleAuctionInfo");
@@ -3128,7 +3214,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessProcessId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerId");
 
@@ -3189,6 +3279,10 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("VehicleDocumentId");
 
                     b.HasIndex("ApplicationId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("VehicleDocumentTypeId");
 
@@ -3310,7 +3404,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("CustomCollectorateId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("PortId");
 
@@ -3367,6 +3465,10 @@ namespace RepositoryLayer.Migrations
                     b.HasIndex("BusinessProcessId");
 
                     b.HasIndex("BuyerId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("SellerId");
 
@@ -3428,7 +3530,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("ApplicationId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DealerId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("VehicleId");
 
@@ -3475,6 +3581,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("VehicleRegHistoryId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("RegistrationDistrictId");
 
@@ -3523,6 +3633,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("AccountHead");
                 });
 
@@ -3563,6 +3677,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("AddressType");
                 });
@@ -3683,6 +3801,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("ApplicationStatus");
                 });
 
@@ -3723,6 +3845,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("AssessmentStatus");
                 });
@@ -3765,6 +3891,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("Bank");
                 });
 
@@ -3805,6 +3935,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("BusinessEvent");
                 });
@@ -3847,6 +3981,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("BusinessPhase");
                 });
 
@@ -3887,6 +4025,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("BusinessPhaseStatus");
                 });
@@ -3940,6 +4082,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessProcessId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("TaxTypeId");
 
                     b.ToTable("BusinessProFeeTax");
@@ -3983,6 +4129,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("BusinessProcess");
                 });
 
@@ -4023,6 +4173,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("BusinessRepStatus");
                 });
@@ -4070,6 +4224,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasIndex("BusinessTypeId");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("BusinessSector");
                 });
 
@@ -4111,6 +4269,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("BusinessStatus");
                 });
 
@@ -4151,6 +4313,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("BusinessTable");
                 });
@@ -4195,6 +4361,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("BusinessTableAccess");
                 });
@@ -4302,6 +4472,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("BusinessType");
                 });
 
@@ -4342,6 +4516,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("ChallanStatus");
                 });
@@ -4384,6 +4562,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("ChallanType");
                 });
 
@@ -4424,6 +4606,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("ClearingAgent");
                 });
@@ -4466,6 +4652,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("Country");
                 });
 
@@ -4506,6 +4696,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("CustomCollectorate");
                 });
@@ -4548,6 +4742,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("District");
                 });
 
@@ -4588,6 +4786,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("HPAStatus");
                 });
@@ -4630,6 +4832,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("OrganizationCategory");
                 });
 
@@ -4670,6 +4876,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("OwnerStatus");
                 });
@@ -4728,6 +4938,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("OwnerTypeId");
 
@@ -4800,6 +5014,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("OwnerType");
                 });
 
@@ -4840,6 +5058,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("PaymentMode");
                 });
@@ -4882,6 +5104,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("PaymentStatus");
                 });
 
@@ -4922,6 +5148,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("PermitTypes");
                 });
@@ -4964,6 +5194,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("PhoneNumberType");
                 });
 
@@ -5004,6 +5238,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("Port");
                 });
@@ -5058,6 +5296,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("RegFeePenaltyRate");
                 });
 
@@ -5098,6 +5340,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("TaxBase");
                 });
@@ -5155,6 +5401,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("TaxBaseId");
 
                     b.HasIndex("TaxTypeId");
@@ -5204,6 +5454,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("TaxRule");
                 });
 
@@ -5251,6 +5505,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("TaxRuleId");
 
                     b.ToTable("TaxType");
@@ -5297,7 +5555,11 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("Tehsil");
                 });
@@ -5340,6 +5602,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleBodyConvention");
                 });
 
@@ -5381,6 +5647,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleBodyType");
                 });
 
@@ -5421,6 +5691,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("VehicleCategory");
                 });
@@ -5513,6 +5787,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.HasIndex("VehicleBodyTypeId");
 
@@ -5624,6 +5902,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("VehicleBodyTypeId");
 
                     b.HasIndex("VehicleCategoryId");
@@ -5679,6 +5961,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleClassGroup");
                 });
 
@@ -5720,6 +6006,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleClassification");
                 });
 
@@ -5760,6 +6050,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("VehicleColor");
                 });
@@ -5824,6 +6118,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleDocumentType");
                 });
 
@@ -5865,6 +6163,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleEngineType");
                 });
 
@@ -5905,6 +6207,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("VehicleFuelType");
                 });
@@ -5950,6 +6256,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.HasIndex("VehicleMakerId");
 
                     b.ToTable("VehicleMake");
@@ -5993,6 +6303,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleMaker");
                 });
 
@@ -6033,6 +6347,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("VehiclePurchaseType");
                 });
@@ -6075,6 +6393,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleRCStatus");
                 });
 
@@ -6115,6 +6437,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("VehicleRouteType");
                 });
@@ -6157,6 +6483,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleScheme");
                 });
 
@@ -6197,6 +6527,10 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
 
                     b.ToTable("VehicleStatus");
                 });
@@ -6239,6 +6573,10 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleType");
                 });
 
@@ -6280,7 +6618,29 @@ namespace RepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("ModifiedBy");
+
                     b.ToTable("VehicleUsage");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.GlobalRight", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.Resource", b =>
@@ -6295,26 +6655,106 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("ControllerId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.ResourceType", "ResourceType")
                         .WithMany()
                         .HasForeignKey("ResourceTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("ResourceAction");
 
                     b.Navigation("ResourceController");
 
                     b.Navigation("ResourceType");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.ResourceAction", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.ResourceController", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.ResourceType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.ResourceTypeDefaultRight", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.Authentication.ResourceTypeRight", "DefaultRTRight")
                         .WithMany()
                         .HasForeignKey("DefaultRTRightId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.Authentication.ResourceTypeRight", "RTRight")
                         .WithMany()
@@ -6324,16 +6764,31 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("DefaultRTRight");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("RTRight");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.ResourceTypeRight", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.Authentication.GlobalRight", "GRight")
                         .WithMany()
                         .HasForeignKey("GRightId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.Authentication.ResourceType", "ResourceType")
                         .WithMany()
@@ -6343,7 +6798,29 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("GRight");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("ResourceType");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.Role", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.RoleAppProcessFlow", b =>
@@ -6354,6 +6831,17 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -6362,11 +6850,26 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("ApplicationProcessFlow");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.RoleResource", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.Resource", "Resource")
                         .WithMany()
                         .HasForeignKey("ResourceId")
@@ -6379,13 +6882,28 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Resource");
 
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.RoleResourceRight", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.ResourceTypeRight", "ResourceTypeRight")
                         .WithMany()
                         .HasForeignKey("RTRightId")
@@ -6398,13 +6916,28 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("ResourceTypeRight");
 
                     b.Navigation("RoleResource");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.RoleResourceRightsHistory", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.Resource", "Resource")
                         .WithMany()
                         .HasForeignKey("ResourceId")
@@ -6417,13 +6950,49 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Resource");
 
                     b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.User", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithOne("User")
+                        .HasForeignKey("Models.DatabaseModels.Authentication.User", "ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.UserStatus", null)
+                        .WithOne("User")
+                        .HasForeignKey("Models.DatabaseModels.Authentication.User", "UserStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.UserType", null)
+                        .WithOne("User")
+                        .HasForeignKey("Models.DatabaseModels.Authentication.User", "UserTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.UserRole", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -6438,11 +7007,26 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("AssociatedUser");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Authentication.UserRoleHistory", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.Authentication.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -6457,7 +7041,31 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("AssociatedUser");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.UserStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.UserType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Biometric.BiometricVerification", b =>
@@ -6467,6 +7075,17 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.Biometric.NadraFranchise", "NadraFranchise")
                         .WithMany()
@@ -6492,13 +7111,97 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("Application");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("NadraFranchise");
 
                     b.Navigation("OwnerGroup");
 
                     b.Navigation("Person");
 
+                    b.Navigation("User");
+
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Biometric.NadraFranchise", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Logging.HttpRequestLog", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Logging.SqlExceptionLog", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Core.EPRSPerson", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Core.PermitApplicationDetail", b =>
@@ -6509,11 +7212,48 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
                     b.Navigation("PermitIssueApplication");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Core.PermitIssueApplication", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.ApplicationStatus", "ApplicationStatus")
+                        .WithMany()
+                        .HasForeignKey("ApplicationStatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.PermitIssuance.Setup.EPRSPermitTypes", "EPRSPermitTypes")
                         .WithMany()
                         .HasForeignKey("PermitTypeId")
@@ -6526,24 +7266,94 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("ApplicationStatus");
+
+                    b.Navigation("District");
+
                     b.Navigation("EPRSPermitTypes");
 
                     b.Navigation("EPRSPerson");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Core.StockInApplication", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Core.StockInApplicationDetails", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.PermitIssuance.Core.StockInApplication", "StockInApplication")
                         .WithMany()
                         .HasForeignKey("StockInApplicationId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("StockInApplication");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.PermitIssuance.Setup.EPRSPermitTypes", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.AuctionResult", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.SeriesNumberPool.SeriesCategory", "SeriesCategory")
                         .WithMany()
                         .HasForeignKey("SeriesCategoryId")
@@ -6562,15 +7372,30 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Series");
 
                     b.Navigation("SeriesCategory");
 
                     b.Navigation("SeriesNumber");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.Series", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.SeriesNumberPool.SeriesCategory", "SeriesCategory")
                         .WithMany()
                         .HasForeignKey("SeriesCategoryId")
@@ -6589,18 +7414,69 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("SeriesCategory");
 
                     b.Navigation("SeriesStatus");
 
                     b.Navigation("SeriesType");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.SeriesCategory", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.SeriesNumber", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.SeriesNumberPool", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.SeriesNumberPool.SeriesCategory", "SeriesCategory")
@@ -6629,6 +7505,8 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Series");
 
                     b.Navigation("SeriesCategory");
@@ -6636,6 +7514,62 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("SeriesNumber");
 
                     b.Navigation("SeriesNumberStatus");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.SeriesNumberStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.SeriesStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.SeriesNumberPool.SeriesType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Address", b =>
@@ -6651,11 +7585,22 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Person", "Person")
                         .WithMany()
@@ -6673,9 +7618,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Person");
 
                     b.Navigation("Tehsil");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Application", b =>
@@ -6704,9 +7653,20 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
@@ -6734,9 +7694,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
 
                     b.Navigation("Seller");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
@@ -6760,11 +7724,22 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
                         .WithMany()
@@ -6838,9 +7813,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
 
                     b.Navigation("OwnerTaxGroup");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
 
@@ -6869,6 +7848,17 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.TaxType", "TaxType")
                         .WithMany()
                         .HasForeignKey("TaxTypeId")
@@ -6877,7 +7867,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("AssessmentBase");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("TaxType");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Business", b =>
@@ -6900,11 +7894,26 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("BusinessSector");
 
                     b.Navigation("BusinessStatus");
 
                     b.Navigation("BusinessType");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.BusinessRep", b =>
@@ -6921,6 +7930,17 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
@@ -6931,7 +7951,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("BusinessRepStatus");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Person");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Challan", b =>
@@ -6960,6 +7984,17 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Application");
 
                     b.Navigation("AssessmentBase");
@@ -6967,6 +8002,10 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("ChallanStatus");
 
                     b.Navigation("ChallanType");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Dealer", b =>
@@ -6976,7 +8015,22 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Business");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.HPA", b =>
@@ -6987,11 +8041,22 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.HPAStatus", "HPAStatus")
                         .WithMany()
                         .HasForeignKey("HPACurrentStatusId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
                         .WithMany()
@@ -7016,7 +8081,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("HPAStatus");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
@@ -7026,6 +8095,12 @@ namespace RepositoryLayer.Migrations
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Application", "Application")
                         .WithMany()
                         .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -7041,18 +8116,38 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Application");
 
                     b.Navigation("HPA");
 
                     b.Navigation("HPAStatus");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Keeper", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Person", "Person")
                         .WithMany()
                         .HasForeignKey("KeeperPersonId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
@@ -7065,15 +8160,30 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
 
                     b.Navigation("Person");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Owner", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.OwnerTaxGroup", "OwnerTaxGroup")
                         .WithMany()
                         .HasForeignKey("OwnerTaxGroupId")
@@ -7086,9 +8196,13 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("OwnerTaxGroup");
 
                     b.Navigation("OwnerType");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.OwnerGroup", b =>
@@ -7096,6 +8210,17 @@ namespace RepositoryLayer.Migrations
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Business", "Business")
                         .WithMany()
                         .HasForeignKey("BusinessId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
@@ -7111,9 +8236,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("Business");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
 
                     b.Navigation("Person");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.PaymentInfo", b =>
@@ -7123,6 +8252,17 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("ChallanId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.PaymentMode", "PaymentMode")
                         .WithMany()
@@ -7138,9 +8278,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("Challan");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("PaymentMode");
 
                     b.Navigation("PaymentStatus");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Person", b =>
@@ -7151,7 +8295,22 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Country");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.PhoneNumber", b =>
@@ -7166,6 +8325,17 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Person", "Person")
                         .WithMany()
@@ -7182,9 +8352,13 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("Country");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Person");
 
                     b.Navigation("PhoneNumberType");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Remarks", b =>
@@ -7194,6 +8368,17 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.OwnerGroup", "OwnerGroup")
                         .WithMany()
@@ -7221,15 +8406,30 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("CurrentUserRole");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
 
                     b.Navigation("OwnerGroup");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.Vehicle", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
@@ -7319,7 +8519,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
+
+                    b.Navigation("User");
 
                     b.Navigation("VehicleBodyConvention");
 
@@ -7354,6 +8558,17 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.VehicleAdditionalInfo", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
@@ -7364,6 +8579,10 @@ namespace RepositoryLayer.Migrations
                         .WithMany()
                         .HasForeignKey("VehicleRCStatusId")
                         .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
 
@@ -7378,6 +8597,17 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
@@ -7385,6 +8615,10 @@ namespace RepositoryLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Application");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
@@ -7403,9 +8637,20 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Owner")
@@ -7424,7 +8669,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Owner");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
@@ -7436,6 +8685,17 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.VehicleDocumentType", "VehicleDocumentType")
                         .WithMany()
@@ -7450,6 +8710,10 @@ namespace RepositoryLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Application");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
 
@@ -7482,11 +8746,22 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.CustomCollectorate", "CustomCollectorate")
                         .WithMany()
                         .HasForeignKey("CustomCollectorateId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.Port", "Port")
                         .WithMany()
@@ -7516,7 +8791,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("CustomCollectorate");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Port");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
 
@@ -7543,6 +8822,17 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Owner", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId")
@@ -7560,7 +8850,11 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("Buyer");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("Seller");
+
+                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });
@@ -7573,11 +8867,22 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Dealer", "Dealer")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Core.Vehicle", "Vehicle")
                         .WithMany()
@@ -7595,6 +8900,10 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("Dealer");
 
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+
                     b.Navigation("Vehicle");
 
                     b.Navigation("VehicleScheme");
@@ -7602,6 +8911,17 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Core.VehicleRegistrationHistory", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("RegistrationDistrictId")
@@ -7622,9 +8942,49 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("District");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("SeriesNumberPool");
 
+                    b.Navigation("User");
+
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.AccountHead", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.AddressType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.ApplicationProcessFlow", b =>
@@ -7717,6 +9077,114 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.ApplicationStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.AssessmentStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.Bank", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessEvent", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessPhase", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessPhaseStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessProFeeTax", b =>
                 {
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.BusinessProcess", "BusinessProcess")
@@ -7724,6 +9192,17 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("BusinessProcessId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.TaxType", "TaxType")
                         .WithMany()
@@ -7733,7 +9212,47 @@ namespace RepositoryLayer.Migrations
 
                     b.Navigation("BusinessProcess");
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("TaxType");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessProcess", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessRepStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessSector", b =>
@@ -7743,7 +9262,76 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("BusinessTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("BusinessType");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessTable", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessTableAccess", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessTableAccessLevel", b =>
@@ -7820,15 +9408,210 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.BusinessType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.ChallanStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.ChallanType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.ClearingAgent", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.Country", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.CustomCollectorate", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.District", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.HPAStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.OrganizationCategory", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.OwnerStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.OwnerTaxGroup", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.OwnerType", "OwnerType")
                         .WithMany()
                         .HasForeignKey("OwnerTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("OwnerType");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.OwnerTaxGroupFees", b =>
@@ -7850,8 +9633,163 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("TaxType");
                 });
 
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.OwnerType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.PaymentMode", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.PaymentStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.PermitTypes", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.PhoneNumberType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.Port", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.RegFeePenaltyRate", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.TaxBase", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.TaxRate", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.TaxBase", "TaxBase")
                         .WithMany()
                         .HasForeignKey("TaxBaseId")
@@ -7876,38 +9814,155 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("TaxBase");
 
                     b.Navigation("TaxType");
+
+                    b.Navigation("User");
 
                     b.Navigation("VehicleClass");
 
                     b.Navigation("VehicleClassDetail");
                 });
 
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.TaxRule", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.TaxType", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.TaxRule", "TaxRule")
                         .WithMany()
                         .HasForeignKey("TaxRuleId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.Navigation("Modifier");
+
                     b.Navigation("TaxRule");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.Tehsil", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("District");
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleBodyConvention", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleBodyType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleCategory", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleClass", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.VehicleBodyType", "VehicleBodyType")
                         .WithMany()
                         .HasForeignKey("VehicleBodyTypeId")
@@ -7942,6 +9997,10 @@ namespace RepositoryLayer.Migrations
                         .HasForeignKey("VehicleTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+
                     b.Navigation("VehicleBodyType");
 
                     b.Navigation("VehicleCategory");
@@ -7957,6 +10016,17 @@ namespace RepositoryLayer.Migrations
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleClassDetail", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.VehicleBodyType", "VehicleBodyType")
                         .WithMany()
                         .HasForeignKey("VehicleBodyTypeId")
@@ -7997,6 +10067,10 @@ namespace RepositoryLayer.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+
                     b.Navigation("VehicleBodyType");
 
                     b.Navigation("VehicleCategory");
@@ -8010,6 +10084,60 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("VehicleType");
 
                     b.Navigation("VehicleUsage");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleClassGroup", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleClassification", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleColor", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleDocumentRequirement", b =>
@@ -8031,14 +10159,242 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("VehicleDocumentType");
                 });
 
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleDocumentType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleEngineType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleFuelType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleMake", b =>
                 {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("Models.DatabaseModels.VehicleRegistration.Setup.VehicleMaker", "VehicleMaker")
                         .WithMany()
                         .HasForeignKey("VehicleMakerId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+
                     b.Navigation("VehicleMaker");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleMaker", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehiclePurchaseType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleRCStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleRouteType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleScheme", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleStatus", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleType", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.VehicleRegistration.Setup.VehicleUsage", b =>
+                {
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "User")
+                        .WithMany()
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.DatabaseModels.Authentication.User", "Modifier")
+                        .WithMany()
+                        .HasForeignKey("ModifiedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Modifier");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.User", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.UserStatus", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.DatabaseModels.Authentication.UserType", b =>
+                {
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

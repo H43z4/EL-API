@@ -31,6 +31,7 @@
     <ProjectReference Include="..\Authentication\Authentication.csproj" />
     <ProjectReference Include="..\Biometric\Biometric.csproj" />
     <ProjectReference Include="..\Logging\Logging.csproj" />
+    <ProjectReference Include="..\PermitIssuance\PermitIssuance.csproj" />
     <ProjectReference Include="..\Profiling\Profiling.csproj" />
     <ProjectReference Include="..\RepositoryLayer\RepositoryLayer.csproj" />
     <ProjectReference Include="..\SeriesNumberPool\SeriesNumberPool.csproj" />

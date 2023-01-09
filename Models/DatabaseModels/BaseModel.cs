@@ -15,14 +15,14 @@ namespace Models.DatabaseModels
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        [ForeignKey("User")]
+        //[ForeignKey("User")]
         public long CreatedBy { get; set; }
-        public virtual User User { get; set; }
+        //public virtual User User { get; set; }
 
         public DateTime? ModifiedAt { get; set; }
 
-        [ForeignKey("Modifier")]
+        //[ForeignKey("Modifier")]
         public long? ModifiedBy { get; set; }
-        public virtual User Modifier { get; set; }
+        //public virtual User Modifier { get; set; }
     }
 }

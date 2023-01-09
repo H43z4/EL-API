@@ -10,6 +10,7 @@ using UserManagement;
 using Logging;
 using Setup;
 using VehicleRegistration;
+using PermitIssuance;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Authentication.JwtStatelessToken;
@@ -115,7 +116,9 @@ namespace APIGateway
 
             #endregion
 
-
+            #region PermitIssuance-Services
+            services.AddTransient<IPermitIssuanceService, PermitIssuanceService>();
+            #endregion
             services.AddStatelessTokenAuthentication();
 
             services.AddControllers().AddNewtonsoftJson();
