@@ -27,7 +27,7 @@ namespace APIGateway.Controllers.PermitIssuance
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = AuthenticationSchemes.JWT_BEARER_TOKEN_STATELESS)]
+    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.JWT_BEARER_TOKEN_STATELESS)]
     public class PermitController : ControllerBase
     {
         private readonly IPermitIssuanceService permitIssuanceService;
@@ -56,20 +56,20 @@ namespace APIGateway.Controllers.PermitIssuance
         public async Task<ApiResponse> SavePermit(VwPermitIssueApplication permitApp)
         {
 
-            this.permitIssuanceService.VwUser = this.User;
+            //this.permitIssuanceService.VwUser = this.User;
 
             DataSet resultData = await this.permitIssuanceService.SavePermit(permitApp);
             var apiResponseType = ApiResponseType.SUCCESS;
             var msg = Constants.DATA_SAVED_MESSAGE;
             object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() == "0")
+            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.DATA_SAVED_MESSAGE;
                 data = new
                 {
-                    OwnerId = resultData.Tables[1].Rows[0][0].ToString()
+                    ApplicationId = resultData.Tables[0].Rows[0][0].ToString()
                 };
 
             }
