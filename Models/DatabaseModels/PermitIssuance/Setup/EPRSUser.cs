@@ -15,7 +15,10 @@ namespace Models.DatabaseModels.PermitIssuance.Setup
         
         public long? PersonId { get; set; }
         public long UserStatusId { get; set; }
+
         
+        [StringLength(50)]
+        public string FullName { get; set; }
 
         [Required]
         [StringLength(20)]

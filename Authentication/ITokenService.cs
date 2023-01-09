@@ -7,6 +7,7 @@ namespace Authentication
     public interface ITokenService 
     {
         Task<AuthenticationResult> Authenticate(string username, string password);
+        Task<AuthenticationResult> AuthenticateUser(string username, string password);
         TokenInfo ValidateToken(string token);
     }
 }

@@ -15,6 +15,7 @@ namespace UserManagement
     {
         Task<DataSet> GetUser(string username);
         Task<DataSet> GetUserInfo(string username);
+        Task<DataSet> GetEPRSUserInfo(string username);
         GeneralType<User> SaveUser(User user);
         GeneralType<Role> SaveRole(Role role);
         GeneralType<Resource> SaveResource(Resource resource);
@@ -54,6 +55,16 @@ namespace UserManagement
             sql[0] = new SqlParameter("@UserName", username);
 
             var ds = await this.adoNet.ExecuteUsingDataAdapter("[Auth].[GetUserInfo]", sql);
+
+            return ds;
+        }
+
+        public async Task<DataSet> GetEPRSUserInfo(string username)
+        {
+            SqlParameter[] sql = new SqlParameter[1];
+            sql[0] = new SqlParameter("@UserName", username);
+
+            var ds = await this.adoNet.ExecuteUsingDataAdapter("[Core].[GetUserInfo]", sql);
 
             return ds;
         }

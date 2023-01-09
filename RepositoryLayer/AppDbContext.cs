@@ -104,6 +104,7 @@ namespace RepositoryLayer
             modelBuilder.Entity<EPRSOrganization>().ToTable("EPRSOrganization", "Setup");
             modelBuilder.Entity<EPRSRole>().ToTable("EPRSRole", "Setup");
             modelBuilder.Entity<EPRSUser>().ToTable("EPRSUser", "Setup");
+            modelBuilder.Entity<EPRSUserRole>().ToTable("EPRSUserRole", "Setup");
             //modelBuilder.Entity<AccountHead>().ToTable("AccountHead", "Setup");
             //modelBuilder.Entity<ApplicationProcessFlow>().ToTable("ApplicationProcessFlow", "Setup");
             //modelBuilder.Entity<BusinessEvent>().ToTable("BusinessEvent", "Setup");

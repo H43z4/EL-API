@@ -54,6 +54,33 @@ namespace Authentication.JwtStatefulToken
             return authenticationResult;
         }
 
+        public async Task<AuthenticationResult> AuthenticateUser(string username, string password)
+        {
+            VwUser _user = await this.ValidateCredentials(username, password);
+
+            var authenticationResult = new AuthenticationResult()
+            {
+                IsAuthenticated = _user is not null,
+                User = _user,
+            };
+
+            if (_user != null)
+            {
+                Claim[] claims = new Claim[]
+                {
+                    new Claim("UserId", _user.UserId.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, _user.UserName),
+                };
+
+                AuthenticationTicket ticket = this.CreateAuthenticationTicket(claims);
+                authenticationResult.Token = this.CreateJwtBearerToken(claims);
+
+                ActiveTokens._tokens.TryAdd(authenticationResult.Token, new TokenInfo() { Ticket = ticket, User = _user });
+            }
+
+            return authenticationResult;
+        }
+
         private async Task<VwUser> ValidateCredentials(string username, string password)
         {
             var ds = await this.userManagement.GetUserInfo(username);

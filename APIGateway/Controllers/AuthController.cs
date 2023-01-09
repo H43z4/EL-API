@@ -5,6 +5,7 @@ using Authentication;
 using System.Linq;
 using SharedLib.Common;
 using System.Threading.Tasks;
+using Models.ViewModels.PermitIssuance.Setup;
 
 namespace APIGateway.Controllers
 {
@@ -28,9 +29,33 @@ namespace APIGateway.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResponse> Login(VwUser model)
+        public async Task<ApiResponse> LoginMVRS(VwUser model)
         {
             var authenticationResult = await this.tokenService.Authenticate(model.UserName, model.Password);
+
+            var apiResponseType = authenticationResult.IsAuthenticated ? ApiResponseType.SUCCESS : ApiResponseType.FAILED;
+            var msg = authenticationResult.IsAuthenticated ? Constants.AUTHORIZED_MESSAGE : Constants.UN_AUTHORIZED_MESSAGE;
+
+            if (authenticationResult.IsAuthenticated)
+            {
+                var data = new
+                {
+                    token = authenticationResult.Token,
+                    authenticationResult.User.UserName,
+                    authenticationResult.User.FullName,
+                    roles = string.Join(" | ", authenticationResult.User.UserRoles.Select(x => x.RoleName))
+                };
+
+                return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+            }
+
+            return ApiResponse.GetApiResponse(apiResponseType, null, msg);
+        }
+
+        [HttpPost]
+        public async Task<ApiResponse> Login(VwEPRSUser model)
+        {
+            var authenticationResult = await this.tokenService.AuthenticateUser(model.UserName, model.Password);
 
             var apiResponseType = authenticationResult.IsAuthenticated ? ApiResponseType.SUCCESS : ApiResponseType.FAILED;
             var msg = authenticationResult.IsAuthenticated ? Constants.AUTHORIZED_MESSAGE : Constants.UN_AUTHORIZED_MESSAGE;

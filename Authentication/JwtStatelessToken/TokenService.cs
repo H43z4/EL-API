@@ -4,7 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models.DatabaseModels.Authentication;
 using Models.ViewModels.Identity;
+using Models.ViewModels.PermitIssuance.Setup;
 using Models.ViewModels.VehicleRegistration.Core;
+using Models.DatabaseModels.PermitIssuance.Setup;
 using SharedLib.Common;
 using System;
 using System.Collections.Generic;
@@ -60,6 +62,32 @@ namespace Authentication.JwtStatelessToken
             return authenticationResult;
         }
 
+        public async Task<AuthenticationResult> AuthenticateUser(string username, string password)
+        {
+            VwEPRSUser _user = await this.ValidateUserCredentials(username, password);
+
+            var authenticationResult = new AuthenticationResult()
+            {
+                IsAuthenticated = _user is not null,
+                EPRSUser = _user,
+            };
+
+            if (_user != null)
+            {
+                Claim[] claims = new Claim[]
+                {
+                    new Claim("UserId", _user.UserId.ToString()),
+                    //new Claim("UserDistrictId", _user.UserDistrictId.ToString()),
+                    new Claim("RoleId", string.Join(",", _user.UserRoles.Select(x => x.RoleId))),
+                    new Claim(ClaimTypes.NameIdentifier, _user.UserName),
+                };
+
+                authenticationResult.Token = this.GenerateJwtSecurityToken(claims);
+            }
+
+            return authenticationResult;
+        }
+
         private async Task<VwUser> ValidateCredentials(string username, string password)
         {
             var ds = await this.userManagement.GetUserInfo(username);
@@ -104,6 +132,51 @@ namespace Authentication.JwtStatelessToken
             var roles = ds.Tables[2].ToList<Role>();
 
             return new VwUser() { UserId = vwUser.UserId, UserName = vwUser.UserName, FullName = fullName, UserDistrictId = vwUser.UserDistrictId, UserRoles = roles };
+        }
+        private async Task<VwEPRSUser> ValidateUserCredentials(string username, string password)
+        {
+            var ds = await this.userManagement.GetEPRSUserInfo(username);
+
+            var vwEPRSUser = ds.Tables[0].ToList<VwEPRSUser>().FirstOrDefault();
+
+            if (vwEPRSUser is null)
+            {
+                return null;
+            }
+
+            var user = new EPRSUser()
+            {
+                UserId = vwEPRSUser.UserId,
+                UserName = vwEPRSUser.UserName,
+                Password = vwEPRSUser.Password
+            };
+
+            var passwordHasher = new PasswordHasher<EPRSUser>();
+            var passwordVerificationResult = passwordHasher.VerifyHashedPassword(user, vwEPRSUser.Password, password);
+
+            if (passwordVerificationResult == PasswordVerificationResult.Failed)
+            {
+                return null;
+            }
+
+            var fullName = string.Empty;
+
+            //if (vwEPRSUser.UserTypeId == 1)
+            //{
+            //    var person = ds.Tables[1].ToList<VwPerson>().FirstOrDefault();
+            //    fullName = person.PersonName;
+            //}
+            //else if (vwUser.UserTypeId == 2)
+            //{
+            //    var business = ds.Tables[1].ToList<VwBusiness>().FirstOrDefault();
+            //    fullName = business.BusinessName;
+            //}
+
+            //var roles = this.userManagement.GetUserRoles(user.UserId);
+
+            var roles = ds.Tables[2].ToList<Role>();
+
+            return new VwEPRSUser() { UserId = vwEPRSUser.UserId, UserName = vwEPRSUser.UserName, FullName = vwEPRSUser.FullName, UserRoles = roles };
         }
 
         private AuthenticationTicket GetAuthenticationTicket(Claim[] claims)
