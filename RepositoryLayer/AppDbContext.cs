@@ -105,6 +105,13 @@ namespace RepositoryLayer
             modelBuilder.Entity<EPRSRole>().ToTable("EPRSRole", "Setup");
             modelBuilder.Entity<EPRSUser>().ToTable("EPRSUser", "Setup");
             modelBuilder.Entity<EPRSUserRole>().ToTable("EPRSUserRole", "Setup");
+
+            modelBuilder.Entity<ProductType>().ToTable("ProductType", "Setup");
+            modelBuilder.Entity<ProductSize>().ToTable("ProductSize", "Setup");
+            modelBuilder.Entity<Manufacturer>().ToTable("Manufacturer", "Setup");
+            modelBuilder.Entity<Product>().ToTable("Product", "Setup");
+            modelBuilder.Entity<ProductDetail>().ToTable("ProductDetail", "Setup");
+
             //modelBuilder.Entity<AccountHead>().ToTable("AccountHead", "Setup");
             //modelBuilder.Entity<ApplicationProcessFlow>().ToTable("ApplicationProcessFlow", "Setup");
             //modelBuilder.Entity<BusinessEvent>().ToTable("BusinessEvent", "Setup");
@@ -342,6 +349,8 @@ namespace RepositoryLayer
         public DbSet<UserType> UserType { get; set; }
         public DbSet<EPRSUser> EPRSUser{ get; set; }
 
+        //public DbSet<EPRSUser> EPRSUser { get; set; }
+
         #endregion
 
         #region Logs
@@ -416,6 +425,8 @@ namespace RepositoryLayer
         public DbSet<PaymentStatus> PaymentStatus { get; set; }
 
         public DbSet<PermitTypes> PermitTypes { get; set; }
+
+        
 
         #endregion
 

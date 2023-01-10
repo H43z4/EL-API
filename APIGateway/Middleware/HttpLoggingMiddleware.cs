@@ -87,7 +87,7 @@ namespace APIGateway.Middleware
                 finally
                 {
                     var currentUser = context.Items["User"] as VwEPRSUser;
-                    httpRequestLog.CreatedBy = currentUser is not null ? currentUser.UserId : 1;
+                    httpRequestLog.CreatedBy = (long)(currentUser is not null ? currentUser.UserId : 1);
 
                     //context.Response.OnCompleted(async () =>
                     //{

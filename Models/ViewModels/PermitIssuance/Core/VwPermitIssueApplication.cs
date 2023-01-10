@@ -15,7 +15,7 @@ namespace Models.ViewModels.PermitIssuance.Core
 
         public long? CountryId { get; set; } // for PR-II
 
-
+        public DateTime CreatedAt { get; set; }
         public string? City { get; set; }
 
         [Required]

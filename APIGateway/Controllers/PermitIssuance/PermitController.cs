@@ -22,12 +22,14 @@ using UserManagement;
 using VehicleRegistration;
 using PermitIssuance;
 using Models.DatabaseModels.epay;
+using Models.ViewModels.PermitIssuance.Setup;
+using Models.ViewModels.SeriesNumberPool.Core;
 
 namespace APIGateway.Controllers.PermitIssuance
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]/[action]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.JWT_BEARER_TOKEN_STATELESS)]
+    [Authorize(AuthenticationSchemes = AuthenticationSchemes.JWT_BEARER_TOKEN_STATELESS)]
     public class PermitController : ControllerBase
     {
         private readonly IPermitIssuanceService permitIssuanceService;
@@ -36,11 +38,11 @@ namespace APIGateway.Controllers.PermitIssuance
         private readonly IUserManagement userManagementService;
         private readonly ILoggingService logger;
 
-        public VwUser User
+        public VwEPRSUser User
         {
             get
             {
-                return (VwUser)this.Request.HttpContext.Items["User"];
+                return (VwEPRSUser)this.Request.HttpContext.Items["User"];
             }
         }
 
@@ -52,11 +54,42 @@ namespace APIGateway.Controllers.PermitIssuance
             this.userManagementService = userManagementServuce;
         }
 
+        #region GET-APIs
+        [HttpGet]
+        public async Task<ApiResponse> GetPermitApplicationListById(int id)
+        {
+            DataSet resultData = await permitIssuanceService.GetPermitApplicationListById(id);
+            var apiResponseType = ApiResponseType.SUCCESS;
+            var msg = Constants.RECORD_FOUND_MESSAGE;
+            object data;
+
+            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            {
+                apiResponseType = ApiResponseType.SUCCESS;
+                msg = Constants.RECORD_FOUND_MESSAGE;
+                data = new
+                {
+                    ApplicationId = resultData.Tables[0].Rows[0][0].ToString()
+                };
+
+            }
+            else
+            {
+                apiResponseType = ApiResponseType.FAILED;
+                msg = Constants.NOT_FOUND_MESSAGE;
+                data = null;
+            }
+
+            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        }
+        #endregion
+
+        #region POST-APIs
         [HttpPost]
         public async Task<ApiResponse> SavePermit(VwPermitIssueApplication permitApp)
         {
 
-            //this.permitIssuanceService.VwUser = this.User;
+            this.permitIssuanceService.VwEPRSUser = this.User;
 
             DataSet resultData = await this.permitIssuanceService.SavePermit(permitApp);
             var apiResponseType = ApiResponseType.SUCCESS;
@@ -97,5 +130,21 @@ namespace APIGateway.Controllers.PermitIssuance
 
         }
 
+
+        [HttpGet]
+        public async Task<ApiResponse> GetPermitList()
+        {
+            this.permitIssuanceService.VwEPRSUser = this.User;
+            DataSet resultData = await this.permitIssuanceService.GetPermitList();
+            var schedule = resultData.Tables[0].ToList<VwPermitIssueApplication>();
+
+            var apiResponseType = schedule.Count() > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+            var msg = schedule.Count() > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+            return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
+
+        }
+        } 
+        #endregion
     }
 }

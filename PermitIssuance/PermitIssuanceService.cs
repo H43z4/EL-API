@@ -15,13 +15,16 @@ using Models.DatabaseModels.PermitIssuance.Setup;
 using Models.DatabaseModels.PermitIssuance.Core;
 using Models.DatabaseModels.VehicleRegistration.Setup;
 using Models.ViewModels.PermitIssuance.Core;
+using Models.ViewModels.PermitIssuance.Setup;
 
 namespace PermitIssuance
 {
-    public interface IPermitIssuanceService : ICurrentUser
+    public interface IPermitIssuanceService : ICurrentEPRSUser
 
     {
         Task<DataSet> SavePermit(VwPermitIssueApplication permitApp);
+        Task<DataSet> GetPermitApplicationListById (int id);
+        Task<DataSet> GetPermitList();
 
     }
     public class PermitIssuanceService : IPermitIssuanceService
@@ -29,7 +32,8 @@ namespace PermitIssuance
         readonly AppDbContext appDbContext;
         readonly IAdoNet adoNet;
         readonly IDBHelper dbHelper;
-        public VwUser VwUser { get; set; }
+        public VwEPRSUser VwUser { get; set; }
+        public VwEPRSUser VwEPRSUser { get; set; }
 
         public PermitIssuanceService(AppDbContext appDbContext, IAdoNet adoNet, IDBHelper dbHelper)
         {
@@ -57,13 +61,30 @@ namespace PermitIssuance
             paramDict.Add("@Nationality", "Christian");
             paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.ToString());
 
-            paramDict.Add("@UserId", 1);
-            //paramDict.Add("@UserId", this.VwUser.UserId);
+            //paramDict.Add("@UserId", 1);
+            paramDict.Add("@UserId", this.VwUser.UserId);
 
             var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
 
             return ds;
         }
 
+
+        public async Task<DataSet> GetPermitList()
+        {
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetPermitApplicationList]", null);
+            return ds;
+        }
+
+        public async Task<DataSet> GetPermitApplicationListById(int Id)
+        {
+            Dictionary<string, object> paramDict = new Dictionary<string, object>();
+
+            paramDict.Add("@Id", Id);
+            
+            var ds = await dbHelper.GetDataSetByStoredProcedure("[Core].[GetPermitApplicationListById]", paramDict);
+
+            return ds;
+        }
     }
 }
