@@ -52,7 +52,7 @@ namespace Stock
                     AmountOfDautyLevied = inventory.AmountOfDautyLevied,
                     ChNoDate = inventory.ChNoDate,
                     Remarks = inventory.Remarks,
-                    CreatedBy = this.VwEPRSUser.UserId
+                    CreatedBy = (long)this.VwEPRSUser.UserId
 
                 }
             }.ToDataTable());

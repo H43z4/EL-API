@@ -9,7 +9,7 @@ namespace Models.ViewModels.PermitIssuance.Setup
 {
     public class VwEPRSUser
     {
-        public long UserId { get; set; }
+        public long? UserId { get; set; }
 
         //public long? UserDistrictId { get; set; }
 
@@ -18,7 +18,7 @@ namespace Models.ViewModels.PermitIssuance.Setup
 
         public string RoleName { get; set; }
         //public string UserType { get; set; }
-        public long UserStatusId { get; set; }
+        public long? UserStatusId { get; set; }
         public string UserStatus { get; set; }
 
         public long? OrganizationId { get; set; }
