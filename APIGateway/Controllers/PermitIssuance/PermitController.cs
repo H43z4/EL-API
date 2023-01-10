@@ -54,6 +54,37 @@ namespace APIGateway.Controllers.PermitIssuance
             this.userManagementService = userManagementServuce;
         }
 
+        #region GET-APIs
+        [HttpGet]
+        public async Task<ApiResponse> GetPermitApplicationListById(int id)
+        {
+            DataSet resultData = await permitIssuanceService.GetPermitApplicationListById(id);
+            var apiResponseType = ApiResponseType.SUCCESS;
+            var msg = Constants.RECORD_FOUND_MESSAGE;
+            object data;
+
+            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            {
+                apiResponseType = ApiResponseType.SUCCESS;
+                msg = Constants.RECORD_FOUND_MESSAGE;
+                data = new
+                {
+                    ApplicationId = resultData.Tables[0].Rows[0][0].ToString()
+                };
+
+            }
+            else
+            {
+                apiResponseType = ApiResponseType.FAILED;
+                msg = Constants.NOT_FOUND_MESSAGE;
+                data = null;
+            }
+
+            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        }
+        #endregion
+
+        #region POST-APIs
         [HttpPost]
         public async Task<ApiResponse> SavePermit(VwPermitIssueApplication permitApp)
         {
@@ -113,5 +144,7 @@ namespace APIGateway.Controllers.PermitIssuance
             return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
 
         }
+        } 
+        #endregion
     }
 }

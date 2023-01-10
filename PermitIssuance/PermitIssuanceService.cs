@@ -23,6 +23,7 @@ namespace PermitIssuance
 
     {
         Task<DataSet> SavePermit(VwPermitIssueApplication permitApp);
+        Task<DataSet> GetPermitApplicationListById (int id);
         Task<DataSet> GetPermitList();
 
     }
@@ -75,5 +76,15 @@ namespace PermitIssuance
             return ds;
         }
 
+        public async Task<DataSet> GetPermitApplicationListById(int Id)
+        {
+            Dictionary<string, object> paramDict = new Dictionary<string, object>();
+
+            paramDict.Add("@Id", Id);
+            
+            var ds = await dbHelper.GetDataSetByStoredProcedure("[Core].[GetPermitApplicationListById]", paramDict);
+
+            return ds;
+        }
     }
 }
