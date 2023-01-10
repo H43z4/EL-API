@@ -146,7 +146,7 @@ namespace Authentication.JwtStatelessToken
 
             var user = new EPRSUser()
             {
-                UserId = vwEPRSUser.UserId,
+                UserId = (long)vwEPRSUser.UserId,
                 UserName = vwEPRSUser.UserName,
                 Password = vwEPRSUser.Password
             };
@@ -174,7 +174,7 @@ namespace Authentication.JwtStatelessToken
 
             //var roles = this.userManagement.GetUserRoles(user.UserId);
 
-            var roles = ds.Tables[2].ToList<Role>();
+            var roles = ds.Tables[1].ToList<Role>();
 
             return new VwEPRSUser() { UserId = vwEPRSUser.UserId, UserName = vwEPRSUser.UserName, FullName = vwEPRSUser.FullName, UserRoles = roles };
         }

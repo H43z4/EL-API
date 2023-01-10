@@ -65,9 +65,9 @@ namespace APIGateway.Controllers
                 var data = new
                 {
                     token = authenticationResult.Token,
-                    authenticationResult.User.UserName,
-                    authenticationResult.User.FullName,
-                    roles = string.Join(" | ", authenticationResult.User.UserRoles.Select(x => x.RoleName))
+                    authenticationResult.EPRSUser.UserName,
+                    authenticationResult.EPRSUser.FullName,
+                    roles = string.Join(" | ", authenticationResult.EPRSUser.UserRoles.Select(x => x.RoleName))
                 };
 
                 return ApiResponse.GetApiResponse(apiResponseType, data, msg);
