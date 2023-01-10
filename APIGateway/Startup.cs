@@ -148,7 +148,7 @@ namespace APIGateway
             //    app.UseDeveloperExceptionPage();
             //}
             app.UseMiddleware<HttpLoggingMiddleware>();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             //app.UseHttpsRedirection();
 
@@ -186,7 +186,7 @@ namespace APIGateway
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("/index.html");
             });
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+          
         }
     }
 }
