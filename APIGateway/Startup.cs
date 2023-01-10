@@ -24,6 +24,7 @@ using Wkhtmltopdf.NetCore;
 using System.Globalization;
 using Payment;
 using SeriesNumberPool;
+using Stock;
 
 namespace APIGateway
 {
@@ -118,6 +119,8 @@ namespace APIGateway
 
             #region PermitIssuance-Services
             services.AddTransient<IPermitIssuanceService, PermitIssuanceService>();
+            services.AddTransient<IInventoryService, InventoryInService>();
+
             #endregion
             services.AddStatelessTokenAuthentication();
 
@@ -177,13 +180,13 @@ namespace APIGateway
 
             app.UseAuthorization();
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("/index.html");
             });
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         }
     }
 }

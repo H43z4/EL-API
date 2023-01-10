@@ -65,7 +65,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Profiling", "Profiling\Prof
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerServices", "WorkerServices\WorkerServices.csproj", "{BAADB094-9EA7-40CF-92AF-6DABE0D5A78D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PermitIssuance", "PermitIssuance\PermitIssuance.csproj", "{FC283296-C605-476D-A8F9-D4AADEE908D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PermitIssuance", "PermitIssuance\PermitIssuance.csproj", "{FC283296-C605-476D-A8F9-D4AADEE908D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stock", "Stock\Stock.csproj", "{6792F837-8C5C-45B9-B0C5-9D9F284B4D12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +187,10 @@ Global
 		{FC283296-C605-476D-A8F9-D4AADEE908D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC283296-C605-476D-A8F9-D4AADEE908D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC283296-C605-476D-A8F9-D4AADEE908D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6792F837-8C5C-45B9-B0C5-9D9F284B4D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6792F837-8C5C-45B9-B0C5-9D9F284B4D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6792F837-8C5C-45B9-B0C5-9D9F284B4D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6792F837-8C5C-45B9-B0C5-9D9F284B4D12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -218,6 +224,7 @@ Global
 		{7067A796-8C38-4044-9639-D64FCA30F2FF} = {513C1082-368D-41D2-BB9C-F560AF8452E7}
 		{BAADB094-9EA7-40CF-92AF-6DABE0D5A78D} = {8553A5B0-3944-47D0-9943-47E5F940D1D9}
 		{FC283296-C605-476D-A8F9-D4AADEE908D5} = {513C1082-368D-41D2-BB9C-F560AF8452E7}
+		{6792F837-8C5C-45B9-B0C5-9D9F284B4D12} = {513C1082-368D-41D2-BB9C-F560AF8452E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FAE49A9-0A8F-4BD9-B0D9-F728BF1F4EE0}
