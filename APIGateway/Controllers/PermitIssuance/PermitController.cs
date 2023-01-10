@@ -58,13 +58,13 @@ namespace APIGateway.Controllers.PermitIssuance
         {
             DataSet resultData = await permitIssuanceService.GetPermitApplicationListById(id);
             var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.DATA_SAVED_MESSAGE;
+            var msg = Constants.RECORD_FOUND_MESSAGE;
             object data;
 
             if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
             {
                 apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.DATA_SAVED_MESSAGE;
+                msg = Constants.RECORD_FOUND_MESSAGE;
                 data = new
                 {
                     ApplicationId = resultData.Tables[0].Rows[0][0].ToString()
@@ -74,7 +74,7 @@ namespace APIGateway.Controllers.PermitIssuance
             else
             {
                 apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.DATA_NOT_SAVED_MESSAGE;
+                msg = Constants.NOT_FOUND_MESSAGE;
                 data = null;
             }
 
