@@ -146,7 +146,7 @@ namespace Authentication.JwtStatelessToken
 
             var user = new EPRSUser()
             {
-                UserId = vwEPRSUser.UserId,
+                UserId = (long)vwEPRSUser.UserId,
                 UserName = vwEPRSUser.UserName,
                 Password = vwEPRSUser.Password
             };
@@ -174,7 +174,7 @@ namespace Authentication.JwtStatelessToken
 
             //var roles = this.userManagement.GetUserRoles(user.UserId);
 
-            var roles = ds.Tables[2].ToList<Role>();
+            var roles = ds.Tables[1].ToList<Role>();
 
             return new VwEPRSUser() { UserId = vwEPRSUser.UserId, UserName = vwEPRSUser.UserName, FullName = vwEPRSUser.FullName, UserRoles = roles };
         }
@@ -253,7 +253,7 @@ namespace Authentication.JwtStatelessToken
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserId").Value);
                 var userName = jwtToken.Claims.First(x => x.Type == "nameid").Value;
-                var userDistrictId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserDistrictId").Value);
+               // var userDistrictId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserDistrictId").Value);
                 var userRoleIds = jwtToken.Claims.First(x => x.Type == "RoleId").Value
                                     .Split(",")
                                     .ToList();
@@ -265,11 +265,11 @@ namespace Authentication.JwtStatelessToken
                 return new TokenInfo()
                 {
                     Ticket = this.GetAuthenticationTicket(jwtToken.Claims.ToArray()),
-                    User = new VwUser()
+                    EPRSUser = new VwEPRSUser()
                     {
                         UserId = userId,
                         UserName = userName,
-                        UserDistrictId = userDistrictId,
+                        //UserDistrictId = userDistrictId,
                         UserRoles = userRoles
                     }
                 };
@@ -280,6 +280,49 @@ namespace Authentication.JwtStatelessToken
                 return null;
             }
         }
+        public TokenInfo ValidateEPRSToken(string token)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_secret);
 
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserId").Value);
+                var userName = jwtToken.Claims.First(x => x.Type == "nameid").Value;
+                // var userDistrictId = int.Parse(jwtToken.Claims.First(x => x.Type == "UserDistrictId").Value);
+                var userRoleIds = jwtToken.Claims.First(x => x.Type == "RoleId").Value
+                                    .Split(",")
+                                    .ToList();
+
+                var userRoles = new List<Role>();
+
+                userRoleIds.ForEach(x => userRoles.Add(new Role() { RoleId = Convert.ToInt32(x) }));
+
+                return new TokenInfo()
+                {
+                    Ticket = this.GetAuthenticationTicket(jwtToken.Claims.ToArray()),
+                    User = new VwUser()
+                    {
+                        UserId = userId,
+                        UserName = userName,
+                        //UserDistrictId = userDistrictId,
+                        UserRoles = userRoles
+                    }
+                };
+            }
+            catch (Exception)
+            {
+                //throw;
+                return null;
+            }
+        }
     }
 }

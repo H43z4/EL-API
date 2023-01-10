@@ -347,6 +347,7 @@ namespace RepositoryLayer
         public DbSet<UserRoleHistory> UserRoleHistory { get; set; }
         public DbSet<UserStatus> UserStatus { get; set; }
         public DbSet<UserType> UserType { get; set; }
+        public DbSet<EPRSUser> EPRSUser{ get; set; }
 
         public DbSet<EPRSUser> EPRSUser { get; set; }
 
