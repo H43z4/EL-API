@@ -349,7 +349,7 @@ namespace RepositoryLayer
         public DbSet<UserType> UserType { get; set; }
         public DbSet<EPRSUser> EPRSUser{ get; set; }
 
-        public DbSet<EPRSUser> EPRSUser { get; set; }
+        //public DbSet<EPRSUser> EPRSUser { get; set; }
 
         #endregion
 
