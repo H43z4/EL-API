@@ -3,6 +3,7 @@ using Models.DatabaseModels.PermitIssuance.Core;
 using Models.DatabaseModels.VehicleRegistration.Core;
 using Models.ViewModels.Identity;
 using Models.ViewModels.PermitIssuance.Core;
+using Models.ViewModels.PermitIssuance.Setup;
 using Models.ViewModels.Stock;
 using Models.ViewModels.VehicleRegistration.Core;
 using RepositoryLayer;
@@ -12,22 +13,22 @@ using System.Data;
 
 namespace Stock
 {
-    public interface IInventoryService : ICurrentUser
+    public interface IInventoryService : ICurrentEPRSUser
     {
         Task<DataSet> SaveConsignment(VwInventory inventory);
 
     }
     public class InventoryInService : IInventoryService
     {
-        readonly AppDbContext appDbContext;
-        readonly IAdoNet adoNet;
+        //readonly AppDbContext appDbContext;
+        //readonly IAdoNet adoNet;
         readonly IDBHelper dbHelper;
-        public VwUser VwUser { get; set; }
+        public VwEPRSUser VwEPRSUser { get; set; }
 
-        public InventoryInService(AppDbContext appDbContext, IAdoNet adoNet, IDBHelper dbHelper)
+        public InventoryInService(IDBHelper dbHelper)
         {
-            this.appDbContext = appDbContext;
-            this.adoNet = adoNet;
+            //this.appDbContext = appDbContext;
+            //this.adoNet = adoNet;
             this.dbHelper = dbHelper;
         }
         public async Task<DataSet> SaveConsignment(VwInventory inventory)
@@ -51,7 +52,7 @@ namespace Stock
                     AmountOfDautyLevied = inventory.AmountOfDautyLevied,
                     ChNoDate = inventory.ChNoDate,
                     Remarks = inventory.Remarks,
-                    CreatedBy = this.VwUser.UserId
+                    CreatedBy = this.VwEPRSUser.UserId
 
                 }
             }.ToDataTable());
@@ -64,9 +65,9 @@ namespace Stock
             });
 
             paramDict.Add("@ConsignmentItems", items.ToDataTable());
-            paramDict.Add("@UserId", this.VwUser.UserId);
+            paramDict.Add("@UserId", this.VwEPRSUser.UserId);
 
-            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveConsignment]", paramDict);
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
 
             return ds;
         }

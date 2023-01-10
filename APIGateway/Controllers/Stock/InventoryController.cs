@@ -3,6 +3,7 @@ using Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.ViewModels.Identity;
+using Models.ViewModels.PermitIssuance.Setup;
 using Models.ViewModels.Stock;
 using Models.ViewModels.VehicleRegistration.Core;
 using SharedLib.Common;
@@ -22,11 +23,17 @@ namespace APIGateway.Controllers.Stock
         private readonly IUserManagement userManagementService;
         private readonly ILoggingService logger;
 
-        public VwUser User
+        public InventoryController(IInventoryService inventoryService, IUserManagement userManagementService, ILoggingService logger)
+        {
+            this.inventoryService = inventoryService;
+            this.userManagementService = userManagementService;
+            this.logger = logger;
+        }
+        public VwEPRSUser User
         {
             get
             {
-                return (VwUser)this.Request.HttpContext.Items["User"];
+                return (VwEPRSUser)this.Request.HttpContext.Items["User"];
             }
         }
         [HttpPost(Name = "SaveConsignment")]
@@ -34,7 +41,7 @@ namespace APIGateway.Controllers.Stock
         {
 
             //this.nrtService.VwUser = this.User;
-            this.inventoryService.VwUser = this.User;
+            this.inventoryService.VwEPRSUser = this.User;
 
             DataSet resultData = await this.inventoryService.SaveConsignment(inventory);
             var apiResponseType = ApiResponseType.SUCCESS;

@@ -3,6 +3,7 @@ using Logging;
 using Microsoft.AspNetCore.Http;
 using Models.DatabaseModels.Logging;
 using Models.ViewModels.Identity;
+using Models.ViewModels.PermitIssuance.Setup;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -21,7 +22,10 @@ namespace APIGateway.Middleware
         {
             return (VwUser)httpContext.Items["User"];
         }
-
+        private VwEPRSUser GetVwEPRSUser(HttpContext httpContext)
+        {
+            return (VwEPRSUser)httpContext.Items["User"];
+        }
         public HttpLoggingMiddleware(RequestDelegate next)
         {
             _next = next;
@@ -82,7 +86,7 @@ namespace APIGateway.Middleware
                 }
                 finally
                 {
-                    var currentUser = context.Items["User"] as VwUser;
+                    var currentUser = context.Items["User"] as VwEPRSUser;
                     httpRequestLog.CreatedBy = currentUser is not null ? currentUser.UserId : 1;
 
                     //context.Response.OnCompleted(async () =>

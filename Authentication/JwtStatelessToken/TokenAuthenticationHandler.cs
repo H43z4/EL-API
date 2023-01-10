@@ -35,7 +35,7 @@ namespace Authentication.JwtStatelessToken
                 return Task.FromResult(AuthenticateResult.Fail(""));
             }
 
-            this.Request.HttpContext.Items["User"] = tokenInfo.User;
+            this.Request.HttpContext.Items["User"] = tokenInfo.EPRSUser;
 
             return Task.FromResult(AuthenticateResult.Success(tokenInfo.Ticket));
         }

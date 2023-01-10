@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Authentication;
 using Models.ViewModels.Identity;
+using Models.ViewModels.PermitIssuance.Setup;
 
 namespace Authentication
 {
@@ -19,5 +20,6 @@ namespace Authentication
         public AuthenticationTicket Ticket { get; set; }
 
         public VwUser User { get; set; }
+        public VwEPRSUser EPRSUser { get; set; }
     }
 }
