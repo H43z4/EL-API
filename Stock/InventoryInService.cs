@@ -17,6 +17,8 @@ namespace Stock
     public interface IInventoryService : ICurrentEPRSUser
     {
         Task<DataSet> SaveConsignment(VwInventory inventory);
+        Task<DataSet> GetStockInApplicationList();
+        Task<DataSet> GetStockInApplicationListById(int id);
 
     }
     public class InventoryInService : IInventoryService
@@ -85,6 +87,23 @@ namespace Stock
 
                 }
             }
+
+            return ds;
+        }
+
+        public async Task<DataSet> GetStockInApplicationList()
+        {
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetStockInApplicationList]", null);
+
+            return ds;
+        }
+
+        public async Task<DataSet> GetStockInApplicationListById(int id)
+        {
+            Dictionary<string, object> paramDict = new Dictionary<string, object>();
+            paramDict.Add("@Id", id);
+
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetStockInApplicationListById]", paramDict);
 
             return ds;
         }
