@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepositoryLayer;
 
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230111184653_202301112346")]
+    partial class _202301112346
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1085,9 +1087,6 @@ namespace RepositoryLayer.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("TotalAmount")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TotalQuantity")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("TransactionDate")

@@ -29,5 +29,7 @@ namespace Models.DatabaseModels.PermitIssuance.Core
         public string ChNoDate { get; set; }
         public string Remarks { get; set; }
 
+        public string DriverName { get; set; }
+
     }
 }

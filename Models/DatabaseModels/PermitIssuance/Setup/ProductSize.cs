@@ -23,5 +23,10 @@ namespace Models.DatabaseModels.PermitIssuance.Setup
         public decimal? QuantityInML { get; set; }
 
         public long ProductQtyforOneUnit { get; set; }
+
+        public long? VendFee { get; set; }
+        public long? RetailPrice { get; set; }
+        public long? DautyRate { get; set; }
+
     }
 }

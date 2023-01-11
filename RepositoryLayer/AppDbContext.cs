@@ -209,6 +209,8 @@ namespace RepositoryLayer
             modelBuilder.Entity<EPRSPerson>().ToTable("EPRSPerson", "Core");
             modelBuilder.Entity<StockInApplication>().ToTable("StockInApplication", "Core");
             modelBuilder.Entity<StockInApplicationDetails>().ToTable("StockInApplicationDetails", "Core");
+            modelBuilder.Entity<OrderMain>().ToTable("OrderMain", "Core");
+            modelBuilder.Entity<OrderDetail>().ToTable("OrderDetail", "Core");
             //modelBuilder.Entity<Application>().ToTable("Application", "Core");
             //modelBuilder.Entity<ApplicationLog>().ToTable("ApplicationLog", "Core");
             //modelBuilder.Entity<Owner>().ToTable("Owner", "Core");

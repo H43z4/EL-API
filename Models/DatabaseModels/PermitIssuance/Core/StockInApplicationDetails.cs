@@ -24,6 +24,8 @@ namespace Models.DatabaseModels.PermitIssuance.Core
 
         public long StrenghtPercentage { get; set; }
         public long ProofGallons { get; set; }
-        
+
+        public long ProductDautyRate { get; set; }
+
     }
 }

@@ -26,5 +26,7 @@ namespace Models.ViewModels.Stock
         public long StrenghtPercentage { get; set; }
         [Required]
         public long ProofGallons { get; set; }
+
+        public long ProductDautyRate { get; set; }
     }
 }
