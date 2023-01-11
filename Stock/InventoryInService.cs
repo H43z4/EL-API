@@ -19,8 +19,10 @@ namespace Stock
         Task<DataSet> SaveConsignment(VwInventory inventory);
         Task<DataSet> GetStockInApplicationList();
         Task<DataSet> GetStockInApplicationListById(int id);
-
+        Task<DataSet> GetProductList();
+        Task<DataSet> GetPersonInfoByCNIC(string cnic); 
     }
+
     public class InventoryInService : IInventoryService
     {
         //readonly AppDbContext appDbContext;
@@ -106,6 +108,24 @@ namespace Stock
             paramDict.Add("@Id", id);
 
             var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetStockInApplicationListById]", paramDict);
+
+            return ds;
+        }
+
+        public async Task<DataSet> GetProductList()
+        {
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetProductList]", null);
+
+            return ds;
+        }
+
+        public async Task<DataSet> GetPersonInfoByCNIC(string cnic)
+        {
+            Dictionary<string, object> paramDict = new Dictionary<string, object>();
+
+            paramDict.Add("@CNIC", cnic);
+
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetPersonInfoByCNIC]", paramDict);
 
             return ds;
         }

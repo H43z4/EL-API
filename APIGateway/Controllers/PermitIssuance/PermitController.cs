@@ -78,11 +78,7 @@ namespace APIGateway.Controllers.PermitIssuance
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
-                data = new
-                {
-                    PermitDeatailById = resultData.Tables[0].ToString()
-                };
-
+                data = resultData.Tables[0].ToList<VwPermitIssueApplication>();
             }
             else
             {
@@ -138,22 +134,6 @@ namespace APIGateway.Controllers.PermitIssuance
             //var msg = vwTempApplication.ApplicationId > 0 ? Constants.DATA_SAVED_MESSAGE : Constants.DATA_NOT_SAVED_MESSAGE;
 
             return ApiResponse.GetApiResponse(apiResponseType, data, msg);
-
-        }
-
-
-        [HttpGet]
-        public async Task<ApiResponse> GetPermitList()
-        {
-            this.permitIssuanceService.VwEPRSUser = this.User;
-            DataSet resultData = await this.permitIssuanceService.GetPermitList();
-            var schedule = resultData.Tables[0];
-            //.ToList<VwPermitIssueApplication>();
-
-            var apiResponseType = schedule.Rows.Count > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
-            var msg = schedule.Rows.Count > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
-
-            return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
 
         }
         #endregion

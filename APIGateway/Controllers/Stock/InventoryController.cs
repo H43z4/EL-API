@@ -3,6 +3,7 @@ using Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.ViewModels.Identity;
+using Models.ViewModels.PermitIssuance.Core;
 using Models.ViewModels.PermitIssuance.Setup;
 using Models.ViewModels.Stock;
 using Models.ViewModels.VehicleRegistration.Core;
@@ -104,21 +105,70 @@ namespace APIGateway.Controllers.Stock
         //    var msg = Constants.RECORD_FOUND_MESSAGE;
         //    object data;
 
-        //    if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
-        //    {
-        //        apiResponseType = ApiResponseType.SUCCESS;
-        //        msg = Constants.RECORD_FOUND_MESSAGE;
-        //        data = resultData;
-        //    }
-        //    else
-        //    {
-        //        apiResponseType = ApiResponseType.FAILED;
-        //        msg = Constants.NOT_FOUND_MESSAGE;
-        //        data = null;
-        //    }
+            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            {
+                apiResponseType = ApiResponseType.SUCCESS;
+                msg = Constants.RECORD_FOUND_MESSAGE;
+                data = resultData.Tables[0].ToList<VwInventory>(); ;
+            }
+            else
+            {
+                apiResponseType = ApiResponseType.FAILED;
+                msg = Constants.NOT_FOUND_MESSAGE;
+                data = null;
+            }
 
-        //    return ApiResponse.GetApiResponse(apiResponseType, data, msg);
-        //} 
+            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        }
+
+        [HttpGet]
+        public async Task<ApiResponse> GetProductList()
+        {
+            DataSet resultData = await inventoryService.GetProductList();
+            var apiResponseType = ApiResponseType.SUCCESS;
+            var msg = Constants.RECORD_FOUND_MESSAGE;
+            object data = null;
+
+            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            {
+                apiResponseType = ApiResponseType.SUCCESS;
+                msg = Constants.RECORD_FOUND_MESSAGE;
+                data = resultData.Tables[0].ToList<VwInventory>();
+            }
+            else
+            {
+                apiResponseType = ApiResponseType.FAILED;
+                msg = Constants.NOT_FOUND_MESSAGE;
+                data = null;
+            }
+
+            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        }
+
+        [HttpGet]
+        public async Task<ApiResponse> GetPersonInfoByCNIC(string cnic)
+        {
+            DataSet resultData = await inventoryService.GetPersonInfoByCNIC(cnic);
+            var apiResponseType = ApiResponseType.SUCCESS;
+            var msg = Constants.RECORD_FOUND_MESSAGE;
+            object data = null;
+
+            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            {
+                apiResponseType = ApiResponseType.SUCCESS;
+                msg = Constants.RECORD_FOUND_MESSAGE;
+                data = resultData.Tables[0].ToList<VwEPRSPerson>();
+            }
+            else
+            {
+                apiResponseType = ApiResponseType.FAILED;
+                msg = Constants.NOT_FOUND_MESSAGE;
+                data = null;
+            }
+
+            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        }
+
         #endregion
     }
 }
