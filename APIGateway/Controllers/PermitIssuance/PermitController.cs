@@ -56,16 +56,15 @@ namespace APIGateway.Controllers.PermitIssuance
         }
 
         #region GET-APIs
-        
         [HttpGet]
         public async Task<ApiResponse> GetPermitList()
         {
             this.permitIssuanceService.VwEPRSUser = this.User;
             DataSet resultData = await this.permitIssuanceService.GetPermitList();
-            var schedule = resultData.Tables[0].ToList<VwPermitIssueApplication>();
+            var schedule = resultData.Tables[0];//.ToList<VwPermitIssueApplication>();
 
-            var apiResponseType = schedule.Count() > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
-            var msg = schedule.Count() > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+            var apiResponseType = schedule.Rows.Count > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+            var msg = schedule.Rows.Count > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
             return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
         }
@@ -86,7 +85,7 @@ namespace APIGateway.Controllers.PermitIssuance
             var msg = Constants.RECORD_FOUND_MESSAGE;
             object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
@@ -115,7 +114,7 @@ namespace APIGateway.Controllers.PermitIssuance
             var msg = Constants.DATA_SAVED_MESSAGE;
             object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.DATA_SAVED_MESSAGE;

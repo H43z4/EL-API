@@ -69,7 +69,7 @@ namespace APIGateway.Controllers.Stock
                 data = null;
             }
             return ApiResponse.GetApiResponse(apiResponseType, data, msg);
-        } 
+        }
         #endregion
 
         #region GET-APIs
@@ -82,7 +82,7 @@ namespace APIGateway.Controllers.Stock
             var msg = Constants.RECORD_FOUND_MESSAGE;
             object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
@@ -106,7 +106,7 @@ namespace APIGateway.Controllers.Stock
             var msg = Constants.RECORD_FOUND_MESSAGE;
             object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
@@ -130,7 +130,7 @@ namespace APIGateway.Controllers.Stock
             var msg = Constants.RECORD_FOUND_MESSAGE;
             object data = null;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
