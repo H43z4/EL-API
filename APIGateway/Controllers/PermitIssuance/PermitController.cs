@@ -89,7 +89,7 @@ namespace APIGateway.Controllers.PermitIssuance
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData.Tables[0].ToList<VwPermitIssueApplication>();
+                data = resultData.Tables[0];//.ToList<VwPermitIssueApplication>();
             }
             else
             {
