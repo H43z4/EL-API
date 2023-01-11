@@ -48,7 +48,7 @@ namespace Stock
             paramDict.Add("@ConsignmentFromId", inventory.ConsignmentFromId);
             paramDict.Add("@PermitNo", inventory.PermitNo);
             paramDict.Add("@PassValidity", inventory.PassValidity);
-            paramDict.Add("@PassValidity", inventory.PassValidity);
+            //paramDict.Add("@PassValidity", inventory.PassValidity);
             paramDict.Add("@VehicleRegistrationNo", inventory.VehicleRegistrationNo);
             paramDict.Add("@SignedByCollector", inventory.SignedByCollector);
             paramDict.Add("@RateOfDauty", inventory.RateOfDauty);
@@ -56,32 +56,32 @@ namespace Stock
             paramDict.Add("@ChNoDate", inventory.AmountOfDautyLevied);
             paramDict.Add("@Remarks", inventory.Remarks);
             paramDict.Add("@CreatedBy", this.VwEPRSUser.UserId);
-            paramDict.Add("@CreatedAt", DateTime.Now);
+            //paramDict.Add("@CreatedAt", System.DateTime.Now);
 
             var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplication]", paramDict);
-            string ConsignmentId = "";
-            if (ds.Tables.Count > 0 && ds.Tables[0].Rows[0][0].ToString() == "0")
+            string StockInApplicationId = "";
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows[0][0].ToString() != "0")
             {
-                ConsignmentId = ds.Tables[0].Rows[0][0].ToString();
-                if (ConsignmentId != null && ConsignmentId != "")
+                StockInApplicationId = ds.Tables[0].Rows[0][0].ToString();
+                if (StockInApplicationId != null && StockInApplicationId != "")
                 {
                     var items = new List<StockInApplicationDetails>();
                     inventory.items.ForEach(x =>
                     {
                         var item = new StockInApplicationDetails();
-                        item.StockInApplicationId = Int64.Parse(ConsignmentId);
+                        item.StockInApplicationId = Int64.Parse(StockInApplicationId);
 
-                        paramDict.Add("@StockInApplicationId", item.StockInApplicationId);
-                        paramDict.Add("@ProductId", item.ProductId);
-                        paramDict.Add("@BottleSizeId", item.BottleSizeId);
-                        paramDict.Add("@Quantity", item.Quantity);
-                        paramDict.Add("@BulkGallons", item.BulkGallons);
-                        paramDict.Add("@StrenghtPercentage", item.StrenghtPercentage);
-                        paramDict.Add("@ProofGallons", item.ProofGallons);
-                        paramDict.Add("@CreatedBy", this.VwEPRSUser.UserId);
-                        paramDict.Add("@CreatedAt", DateTime.Now);
-                        paramDict.Add("@ConsignmentItems", items.ToDataTable());
-                        this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplication]", paramDict2);
+                        paramDict2.Add("@StockInApplicationId", item.StockInApplicationId);
+                        paramDict2.Add("@ProductId", item.ProductId);
+                        paramDict2.Add("@BottleSizeId", item.BottleSizeId);
+                        paramDict2.Add("@Quantity", item.Quantity);
+                        paramDict2.Add("@BulkGallons", item.BulkGallons);
+                        paramDict2.Add("@StrenghtPercentage", item.StrenghtPercentage);
+                        paramDict2.Add("@ProofGallons", item.ProofGallons);
+                        paramDict2.Add("@CreatedBy", this.VwEPRSUser.UserId);
+                        //paramDict2.Add("@CreatedAt", DateTime.Now);
+                        paramDict2.Add("@ConsignmentItems", items.ToDataTable());
+                        this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplicationDetails]", paramDict2);
                     });
 
 
