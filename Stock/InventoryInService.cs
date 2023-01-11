@@ -45,6 +45,7 @@ namespace Stock
             paramDict.Add("@ExcisePassNo", inventory.ExcisePassNo);
             paramDict.Add("@RequestDate", inventory.RequestDate);
             paramDict.Add("@TransportExportNo", inventory.TransportExportNo);
+            paramDict.Add("@DriverName", inventory.DriverName);
             paramDict.Add("@ConsignmentFromId", inventory.ConsignmentFromId);
             paramDict.Add("@PermitNo", inventory.PermitNo);
             paramDict.Add("@PassValidity", inventory.PassValidity);
@@ -75,12 +76,13 @@ namespace Stock
                         paramDict2.Add("@ProductId", item.ProductId);
                         paramDict2.Add("@BottleSizeId", item.BottleSizeId);
                         paramDict2.Add("@Quantity", item.Quantity);
+                        paramDict2.Add("@Breakage", item.Breakage);
                         paramDict2.Add("@BulkGallons", item.BulkGallons);
                         paramDict2.Add("@StrenghtPercentage", item.StrenghtPercentage);
                         paramDict2.Add("@ProofGallons", item.ProofGallons);
                         paramDict2.Add("@CreatedBy", this.VwEPRSUser.UserId);
                         //paramDict2.Add("@CreatedAt", DateTime.Now);
-                        paramDict2.Add("@ConsignmentItems", items.ToDataTable());
+                        //paramDict2.Add("@ConsignmentItems", items.ToDataTable());
                         this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplicationDetails]", paramDict2);
                     });
 

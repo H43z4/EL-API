@@ -50,7 +50,7 @@ namespace APIGateway.Controllers.Stock
             var msg = Constants.DATA_SAVED_MESSAGE;
             object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() == "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.DATA_SAVED_MESSAGE;
