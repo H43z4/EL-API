@@ -9,6 +9,7 @@ namespace Models.ViewModels.PermitIssuance.Setup
 {
     public class VwEPRSPerson
     {
+        public long PersonId { get; set; }
         public string PersonName { get; set; }
         public string CNIC_PASSPORT { get; set; }
         public string CellNo { get; set; }
