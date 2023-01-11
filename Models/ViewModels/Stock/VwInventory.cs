@@ -17,6 +17,7 @@ namespace Models.ViewModels.Stock
         public DateTime RequestDate { get; set; }
         [Required]
         public string TransportExportNo { get; set; }
+        public string DriverName { get; set; }
         [Required]
         public long ConsignmentFromId { get; set; }
         [Required]

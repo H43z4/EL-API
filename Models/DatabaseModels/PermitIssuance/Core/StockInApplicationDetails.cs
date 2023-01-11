@@ -20,6 +20,7 @@ namespace Models.DatabaseModels.PermitIssuance.Core
         public long BottleSizeId { get; set; }
         public long Quantity { get; set; }
         public long BulkGallons { get; set; }
+        public long Breakage { get; set; }
 
         public long StrenghtPercentage { get; set; }
         public long ProofGallons { get; set; }
