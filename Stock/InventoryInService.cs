@@ -1,4 +1,5 @@
-﻿using Models.DatabaseModels.epay;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Models.DatabaseModels.epay;
 using Models.DatabaseModels.PermitIssuance.Core;
 using Models.DatabaseModels.VehicleRegistration.Core;
 using Models.ViewModels.Identity;
@@ -16,6 +17,8 @@ namespace Stock
     public interface IInventoryService : ICurrentEPRSUser
     {
         Task<DataSet> SaveConsignment(VwInventory inventory);
+        Task<DataSet> GetStockInApplicationList();
+        Task<DataSet> GetStockInApplicationListById(int id);
 
     }
     public class InventoryInService : IInventoryService
@@ -34,40 +37,73 @@ namespace Stock
         public async Task<DataSet> SaveConsignment(VwInventory inventory)
         {
             Dictionary<string, object> paramDict = new Dictionary<string, object>();
+            Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
 
-            paramDict.Add("@Consignment", new List<StockInApplication>()
+
+            paramDict.Add("@StockInApplicationId", inventory.StockInApplicationId);
+            paramDict.Add("@OrganisationId", inventory.OrganisationId);
+            paramDict.Add("@ExcisePassNo", inventory.ExcisePassNo);
+            paramDict.Add("@RequestDate", inventory.RequestDate);
+            paramDict.Add("@TransportExportNo", inventory.TransportExportNo);
+            paramDict.Add("@ConsignmentFromId", inventory.ConsignmentFromId);
+            paramDict.Add("@PermitNo", inventory.PermitNo);
+            paramDict.Add("@PassValidity", inventory.PassValidity);
+            //paramDict.Add("@PassValidity", inventory.PassValidity);
+            paramDict.Add("@VehicleRegistrationNo", inventory.VehicleRegistrationNo);
+            paramDict.Add("@SignedByCollector", inventory.SignedByCollector);
+            paramDict.Add("@RateOfDauty", inventory.RateOfDauty);
+            paramDict.Add("@AmountOfDautyLevied", inventory.AmountOfDautyLevied);
+            paramDict.Add("@ChNoDate", inventory.AmountOfDautyLevied);
+            paramDict.Add("@Remarks", inventory.Remarks);
+            paramDict.Add("@CreatedBy", this.VwEPRSUser.UserId);
+            //paramDict.Add("@CreatedAt", System.DateTime.Now);
+
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplication]", paramDict);
+            string StockInApplicationId = "";
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows[0][0].ToString() != "0")
             {
-                new StockInApplication()
+                StockInApplicationId = ds.Tables[0].Rows[0][0].ToString();
+                if (StockInApplicationId != null && StockInApplicationId != "")
                 {
-                    StockInApplicationId = inventory.StockInApplicationId,
-                    ExcisePassNo = inventory.ExcisePassNo,
-                    RequestDate = inventory.RequestDate,
-                    TransportExportNo = inventory.TransportExportNo,
-                    ConsignmentFromId = inventory.ConsignmentFromId,
-                    PermitNo = inventory.PermitNo,
-                    PassValidity = inventory.PassValidity,
-                    VehicleRegistrationNo = inventory.VehicleRegistrationNo,
-                    SignedByCollector = inventory.SignedByCollector,
-                    RateOfDauty = inventory.RateOfDauty,
-                    AmountOfDautyLevied = inventory.AmountOfDautyLevied,
-                    ChNoDate = inventory.ChNoDate,
-                    Remarks = inventory.Remarks,
-                    CreatedBy = (long)this.VwEPRSUser.UserId
+                    var items = new List<StockInApplicationDetails>();
+                    inventory.items.ForEach(x =>
+                    {
+                        var item = new StockInApplicationDetails();
+                        item.StockInApplicationId = Int64.Parse(StockInApplicationId);
+
+                        paramDict2.Add("@StockInApplicationId", item.StockInApplicationId);
+                        paramDict2.Add("@ProductId", item.ProductId);
+                        paramDict2.Add("@BottleSizeId", item.BottleSizeId);
+                        paramDict2.Add("@Quantity", item.Quantity);
+                        paramDict2.Add("@BulkGallons", item.BulkGallons);
+                        paramDict2.Add("@StrenghtPercentage", item.StrenghtPercentage);
+                        paramDict2.Add("@ProofGallons", item.ProofGallons);
+                        paramDict2.Add("@CreatedBy", this.VwEPRSUser.UserId);
+                        //paramDict2.Add("@CreatedAt", DateTime.Now);
+                        paramDict2.Add("@ConsignmentItems", items.ToDataTable());
+                        this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplicationDetails]", paramDict2);
+                    });
+
 
                 }
-            }.ToDataTable());
-            var items = new List<StockInApplicationDetails>();
-            inventory.items.ForEach(x =>
-            {
-                var item = new StockInApplicationDetails();
-                EntityMapper<VwInventoryItems, StockInApplicationDetails>.CopyByPropertyNameAndType(x, item);
-                items.Add(item);
-            });
+            }
 
-            paramDict.Add("@ConsignmentItems", items.ToDataTable());
-            paramDict.Add("@UserId", this.VwEPRSUser.UserId);
+            return ds;
+        }
 
-            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
+        public async Task<DataSet> GetStockInApplicationList()
+        {
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetStockInApplicationList]", null);
+
+            return ds;
+        }
+
+        public async Task<DataSet> GetStockInApplicationListById(int id)
+        {
+            Dictionary<string, object> paramDict = new Dictionary<string, object>();
+            paramDict.Add("@Id", id);
+
+            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetStockInApplicationListById]", paramDict);
 
             return ds;
         }

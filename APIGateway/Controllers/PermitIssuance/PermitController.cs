@@ -56,6 +56,20 @@ namespace APIGateway.Controllers.PermitIssuance
         }
 
         #region GET-APIs
+        
+        [HttpGet]
+        public async Task<ApiResponse> GetPermitList()
+        {
+            this.permitIssuanceService.VwEPRSUser = this.User;
+            DataSet resultData = await this.permitIssuanceService.GetPermitList();
+            var schedule = resultData.Tables[0].ToList<VwPermitIssueApplication>();
+
+            var apiResponseType = schedule.Count() > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+            var msg = schedule.Count() > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+            return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
+        }
+
         [HttpGet]
         public async Task<ApiResponse> GetPermitApplicationListById(int id)
         {
