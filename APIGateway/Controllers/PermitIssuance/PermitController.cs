@@ -24,6 +24,7 @@ using PermitIssuance;
 using Models.DatabaseModels.epay;
 using Models.ViewModels.PermitIssuance.Setup;
 using Models.ViewModels.SeriesNumberPool.Core;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace APIGateway.Controllers.PermitIssuance
 {
@@ -73,6 +74,14 @@ namespace APIGateway.Controllers.PermitIssuance
         public async Task<ApiResponse> GetPermitApplicationListById(int id)
         {
             DataSet resultData = await permitIssuanceService.GetPermitApplicationListById(id);
+
+
+            //var schedule = resultData.Tables[0].ToList<VwPermitIssueApplication>();
+
+            //var apiResponseType = schedule.Count() > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+            //var msg = schedule.Count() > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+
             var apiResponseType = ApiResponseType.SUCCESS;
             var msg = Constants.RECORD_FOUND_MESSAGE;
             object data;
@@ -83,7 +92,7 @@ namespace APIGateway.Controllers.PermitIssuance
                 msg = Constants.RECORD_FOUND_MESSAGE;
                 data = new
                 {
-                    ApplicationId = resultData.Tables[0].Rows[0][0].ToString()
+                    PermitDeatailById = resultData.Tables[0].ToString()
                 };
 
             }
@@ -141,6 +150,22 @@ namespace APIGateway.Controllers.PermitIssuance
             //var msg = vwTempApplication.ApplicationId > 0 ? Constants.DATA_SAVED_MESSAGE : Constants.DATA_NOT_SAVED_MESSAGE;
 
             return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+
+        }
+
+
+        [HttpGet]
+        public async Task<ApiResponse> GetPermitList()
+        {
+            this.permitIssuanceService.VwEPRSUser = this.User;
+            DataSet resultData = await this.permitIssuanceService.GetPermitList();
+            var schedule = resultData.Tables[0];
+            //.ToList<VwPermitIssueApplication>();
+
+            var apiResponseType = schedule.Rows.Count > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+            var msg = schedule.Rows.Count > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+            return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
 
         }
         #endregion
