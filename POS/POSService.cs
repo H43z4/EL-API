@@ -32,11 +32,11 @@ namespace POS
             paramDict.Add("@OrganisationId", orderMain.OrganisationId);
             paramDict.Add("@PersonId", orderMain.PersonId);
             paramDict.Add("@PermitNo", orderMain.PermitNo);
-            paramDict.Add("@Tax", orderMain.Tax);
+            paramDict.Add("@Tax", 0);
             paramDict.Add("@TotalQuantity", orderMain.TotalQuantity);
             paramDict.Add("@TotalAmount", orderMain.TotalAmount);
-            paramDict.Add("@GrandTotal", orderMain.GrandTotal);
-            paramDict.Add("@Discount", orderMain.Discount);
+            paramDict.Add("@GrandTotal", orderMain.TotalAmount);
+            paramDict.Add("@Discount", 0);
             paramDict.Add("@CreatedBy", this.VwEPRSUser.UserId);
 
             var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveVendShopOrder]", paramDict);
