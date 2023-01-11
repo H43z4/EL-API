@@ -109,7 +109,7 @@ namespace APIGateway.Controllers.Stock
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData;
+                data = resultData.Tables[0].ToList<VwInventory>(); ;
             }
             else
             {
@@ -133,7 +133,7 @@ namespace APIGateway.Controllers.Stock
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData.Tables[0].ToList<VwProductList>();
+                data = resultData.Tables[0].ToList<VwInventory>();
             }
             else
             {
