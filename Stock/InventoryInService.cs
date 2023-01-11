@@ -47,7 +47,7 @@ namespace Stock
             paramDict.Add("@ExcisePassNo", inventory.ExcisePassNo);
             paramDict.Add("@RequestDate", inventory.RequestDate);
             paramDict.Add("@TransportExportNo", inventory.TransportExportNo);
-            paramDict.Add("@DriverName", inventory.DriverName);
+            //paramDict.Add("@DriverName", inventory.DriverName);
             paramDict.Add("@ConsignmentFromId", inventory.ConsignmentFromId);
             paramDict.Add("@PermitNo", inventory.PermitNo);
             paramDict.Add("@PassValidity", inventory.PassValidity);
@@ -78,7 +78,7 @@ namespace Stock
                         paramDict2.Add("@ProductId", item.ProductId);
                         paramDict2.Add("@BottleSizeId", item.BottleSizeId);
                         paramDict2.Add("@Quantity", item.Quantity);
-                        paramDict2.Add("@Breakage", item.Breakage);
+                        //paramDict2.Add("@Breakage", item.Breakage);
                         paramDict2.Add("@BulkGallons", item.BulkGallons);
                         paramDict2.Add("@StrenghtPercentage", item.StrenghtPercentage);
                         paramDict2.Add("@ProofGallons", item.ProofGallons);

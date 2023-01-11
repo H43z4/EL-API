@@ -11,6 +11,7 @@ using PermitIssuance;
 using SharedLib.Common;
 using Stock;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using UserManagement;
 
@@ -153,11 +154,11 @@ namespace APIGateway.Controllers.Stock
             var msg = Constants.RECORD_FOUND_MESSAGE;
             object data = null;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+            if (resultData.Tables.Count > 0)
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData.Tables[0].ToList<VwEPRSPerson>();
+                data = SharedLib.Common.Extentions.ToList<VwEPRSPerson>(resultData.Tables[0]).FirstOrDefault();
             }
             else
             {
