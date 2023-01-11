@@ -25,6 +25,7 @@ using System.Globalization;
 using Payment;
 using SeriesNumberPool;
 using Stock;
+using POS;
 
 namespace APIGateway
 {
@@ -120,6 +121,7 @@ namespace APIGateway
             #region PermitIssuance-Services
             services.AddTransient<IPermitIssuanceService, PermitIssuanceService>();
             services.AddTransient<IInventoryService, InventoryInService>();
+            services.AddTransient<IPOSService, POSService>();
 
             #endregion
             services.AddStatelessTokenAuthentication();
