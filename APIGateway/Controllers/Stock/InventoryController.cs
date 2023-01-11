@@ -72,53 +72,53 @@ namespace APIGateway.Controllers.Stock
 
         #region GET-APIs
 
-        [HttpGet]
-        public async Task<ApiResponse> GetStockInApplicationList()
-        {
-            DataSet resultData = await inventoryService.GetStockInApplicationList();
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data;
+        //[HttpGet]
+        //public async Task<ApiResponse> GetStockInApplicationList()
+        //{
+        //    DataSet resultData = await inventoryService.GetStockInApplicationList();
+        //    var apiResponseType = ApiResponseType.SUCCESS;
+        //    var msg = Constants.RECORD_FOUND_MESSAGE;
+        //    object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
-            {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData;
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+        //    if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+        //    {
+        //        apiResponseType = ApiResponseType.SUCCESS;
+        //        msg = Constants.RECORD_FOUND_MESSAGE;
+        //        data = resultData;
+        //    }
+        //    else
+        //    {
+        //        apiResponseType = ApiResponseType.FAILED;
+        //        msg = Constants.NOT_FOUND_MESSAGE;
+        //        data = null;
+        //    }
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
-        }
+        //    return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        //}
 
-        [HttpGet]
-        public async Task<ApiResponse> GetStockInApplicationListById(int id)
-        {
-            DataSet resultData = await inventoryService.GetStockInApplicationListById(id);
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data;
+        //[HttpGet]
+        //public async Task<ApiResponse> GetStockInApplicationListById(int id)
+        //{
+        //    DataSet resultData = await inventoryService.GetStockInApplicationListById(id);
+        //    var apiResponseType = ApiResponseType.SUCCESS;
+        //    var msg = Constants.RECORD_FOUND_MESSAGE;
+        //    object data;
 
-            if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
-            {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData;
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+        //    if (resultData.Tables.Count > 0 && resultData.Tables[0].Rows[0][0].ToString() != "0")
+        //    {
+        //        apiResponseType = ApiResponseType.SUCCESS;
+        //        msg = Constants.RECORD_FOUND_MESSAGE;
+        //        data = resultData;
+        //    }
+        //    else
+        //    {
+        //        apiResponseType = ApiResponseType.FAILED;
+        //        msg = Constants.NOT_FOUND_MESSAGE;
+        //        data = null;
+        //    }
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
-        } 
+        //    return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        //} 
         #endregion
     }
 }
