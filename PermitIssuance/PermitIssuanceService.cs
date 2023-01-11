@@ -62,7 +62,7 @@ namespace PermitIssuance
             paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.ToString());
 
             //paramDict.Add("@UserId", 1);
-            paramDict.Add("@UserId", this.VwUser.UserId);
+            paramDict.Add("@UserId", this.VwEPRSUser.UserId);
 
             var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
 
