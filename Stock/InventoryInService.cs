@@ -39,7 +39,6 @@ namespace Stock
         public async Task<DataSet> SaveConsignment(VwInventory inventory)
         {
             Dictionary<string, object> paramDict = new Dictionary<string, object>();
-            Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
 
 
             paramDict.Add("@StockInApplicationId", inventory.StockInApplicationId);
@@ -68,10 +67,11 @@ namespace Stock
                 StockInApplicationId = ds.Tables[0].Rows[0][0].ToString();
                 if (StockInApplicationId != null && StockInApplicationId != "")
                 {
+
                     var items = new List<StockInApplicationDetails>();
-                    inventory.items.ForEach(x =>
+                    foreach (var item in inventory.items)
                     {
-                        var item = new StockInApplicationDetails();
+                        Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
                         item.StockInApplicationId = Int64.Parse(StockInApplicationId);
 
                         paramDict2.Add("@StockInApplicationId", item.StockInApplicationId);
@@ -86,7 +86,7 @@ namespace Stock
                         //paramDict2.Add("@CreatedAt", DateTime.Now);
                         //paramDict2.Add("@ConsignmentItems", items.ToDataTable());
                         this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplicationDetails]", paramDict2);
-                    });
+                    }
 
 
                 }
