@@ -72,6 +72,8 @@ namespace Stock
                     foreach (var item in inventory.items)
                     {
                         Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
+
+                        var item = new StockInApplicationDetails();
                         item.StockInApplicationId = Int64.Parse(StockInApplicationId);
 
                         paramDict2.Add("@StockInApplicationId", item.StockInApplicationId);
