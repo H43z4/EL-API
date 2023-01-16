@@ -39,7 +39,6 @@ namespace Stock
         public async Task<DataSet> SaveConsignment(VwInventory inventory)
         {
             Dictionary<string, object> paramDict = new Dictionary<string, object>();
-            Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
 
 
             paramDict.Add("@StockInApplicationId", inventory.StockInApplicationId);
@@ -71,6 +70,8 @@ namespace Stock
                     var items = new List<StockInApplicationDetails>();
                     inventory.items.ForEach(x =>
                     {
+                        Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
+
                         var item = new StockInApplicationDetails();
                         item.StockInApplicationId = Int64.Parse(StockInApplicationId);
 

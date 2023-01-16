@@ -158,7 +158,8 @@ namespace APIGateway.Controllers.Stock
             {
                 apiResponseType = ApiResponseType.SUCCESS;
                 msg = Constants.RECORD_FOUND_MESSAGE;
-                data = SharedLib.Common.Extentions.ToList<VwEPRSPerson>(resultData.Tables[0]).FirstOrDefault();
+                //data = SharedLib.Common.Extentions.ToList<VwEPRSPerson>(resultData.Tables[0]).FirstOrDefault();
+                data = resultData.Tables[0];
             }
             else
             {
