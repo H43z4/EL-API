@@ -36,6 +36,8 @@ namespace Models.ViewModels.Stock
         public string ChNoDate { get; set; }
         [Required]
         public string Remarks { get; set; }
+
+        
         [Required]
         public List<VwInventoryItems> items { get; set; }
     }

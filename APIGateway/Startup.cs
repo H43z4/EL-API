@@ -4,27 +4,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-
 using RepositoryLayer;
 using UserManagement;
 using Logging;
 using Setup;
-using VehicleRegistration;
 using PermitIssuance;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Authentication.JwtStatelessToken;
 using Authentication;
 using APIGateway.Middleware;
-using AMQPSvc;
-using Biometric;
-using Admin;
-using Profiling;
 using Wkhtmltopdf.NetCore;
-using System.Globalization;
-using Payment;
-using SeriesNumberPool;
 using Stock;
+using POS;
 
 namespace APIGateway
 {
@@ -90,23 +82,13 @@ namespace APIGateway
             //services.AddTransient<ILog, LogService>();
             services.AddScoped<ILoggingService, LoggingService>();
             services.AddTransient<IUserManagement, UserManagement.UserManagement>();
-            services.AddTransient<IMessageProducer, AMQPSvc.RabbitMQ.RabbitMQProducer>();
-            //services.AddHostedService<RabbitMQBioAssociationService>();
-            services.AddScoped<ISeriesNumberPoolService, SeriesNumberPoolService>();
             #region Vehicle-Registration-Services
 
-            services.AddTransient<IAdminService, AdminService>();
-            services.AddTransient<IProfilingService, ProfilingService>();
-            services.AddTransient<IRegistrationService, RegistrationService>();
-            services.AddTransient<INRTService, NRTService>();
-            services.AddTransient<ITOService, TOService>();
-            services.AddTransient<IBiometricService, BiometricService>();
-            services.AddTransient<IPaymentService, PaymentService>();
+         
 
             services.AddTransient<IVehicleClassService, VehicleClassService>();
             services.AddTransient(typeof(ISetupservice<>), typeof(SetupService<>));
-            services.AddTransient(typeof(IOwnerService), typeof(OwnerService));
-            services.AddTransient(typeof(IVehicleService), typeof(VehicleService));
+           
 
             #endregion
 
@@ -120,6 +102,7 @@ namespace APIGateway
             #region PermitIssuance-Services
             services.AddTransient<IPermitIssuanceService, PermitIssuanceService>();
             services.AddTransient<IInventoryService, InventoryInService>();
+            services.AddTransient<IPOSService, POSService>();
 
             #endregion
             services.AddStatelessTokenAuthentication();

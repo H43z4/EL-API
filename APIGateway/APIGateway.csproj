@@ -6,9 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\VehicleRegistration\OwnerController.cs" />
-    <Compile Remove="Controllers\VehicleRegistration\RegistrationController - Copy.cs" />
-    <Compile Remove="Controllers\VehicleRegistration\VehicleController.cs" />
     <Compile Remove="Logging\ErrorHandlingFilter.cs" />
     <Compile Remove="Logging\InterceptionAttribute.cs" />
   </ItemGroup>
@@ -27,19 +24,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Admin\Admin.csproj" />
-    <ProjectReference Include="..\AMQPSvc\AMQPSvc.csproj" />
     <ProjectReference Include="..\Authentication\Authentication.csproj" />
-    <ProjectReference Include="..\Biometric\Biometric.csproj" />
     <ProjectReference Include="..\Logging\Logging.csproj" />
     <ProjectReference Include="..\PermitIssuance\PermitIssuance.csproj" />
-    <ProjectReference Include="..\Profiling\Profiling.csproj" />
+    <ProjectReference Include="..\POS\POS.csproj" />
     <ProjectReference Include="..\RepositoryLayer\RepositoryLayer.csproj" />
-    <ProjectReference Include="..\SeriesNumberPool\SeriesNumberPool.csproj" />
     <ProjectReference Include="..\Setup\Setup.csproj" />
     <ProjectReference Include="..\SharedLib\SharedLib.csproj" />
     <ProjectReference Include="..\Stock\Stock.csproj" />
     <ProjectReference Include="..\UserManagement\UserManagement.csproj" />
-    <ProjectReference Include="..\VehicleRegistration\VehicleRegistration.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,12 +45,6 @@
     <Folder Include="Controllers\Payment\" />
     <Folder Include="Rotativa\" />
     <Folder Include="Views\Home\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Views\Reports\GetChallan.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

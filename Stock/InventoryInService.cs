@@ -67,8 +67,9 @@ namespace Stock
                 StockInApplicationId = ds.Tables[0].Rows[0][0].ToString();
                 if (StockInApplicationId != null && StockInApplicationId != "")
                 {
+
                     var items = new List<StockInApplicationDetails>();
-                    inventory.items.ForEach(x =>
+                    foreach (var item in inventory.items)
                     {
                         Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
 
@@ -87,7 +88,7 @@ namespace Stock
                         //paramDict2.Add("@CreatedAt", DateTime.Now);
                         //paramDict2.Add("@ConsignmentItems", items.ToDataTable());
                         this.dbHelper.GetDataSetByStoredProcedure("[Core].[SaveStockinApplicationDetails]", paramDict2);
-                    });
+                    }
 
 
                 }

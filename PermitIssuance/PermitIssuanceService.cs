@@ -44,29 +44,39 @@ namespace PermitIssuance
 
         public async Task<DataSet> SavePermit(VwPermitIssueApplication permitApp)
         {
-            Dictionary<string, object> paramDict = new Dictionary<string, object>();
 
-            paramDict.Add("@ApplicationId", permitApp.ApplicationId);
-            paramDict.Add("@OldPermitNo", permitApp.OldPermitNo.Value);
-            paramDict.Add("@PermitTypeId", permitApp.PermitTypeId);
-            paramDict.Add("@PersonName", permitApp.PersonName);
-            paramDict.Add("@FatherHusbandName", permitApp.FatherHusbandName);
-            paramDict.Add("@Address", permitApp.Address);
-            paramDict.Add("@DateofBirth", permitApp.DateofBirth);
-            paramDict.Add("@CellNo", permitApp.CellNo);
-            paramDict.Add("@City", permitApp.City.ToString());
-            paramDict.Add("@CountryId", permitApp.CountryId.Value);
-            paramDict.Add("@CNIC", permitApp.CNIC.ToString());
-            paramDict.Add("@PassportNo", permitApp.PassportNo.ToString());
-            paramDict.Add("@Nationality", "Christian");
-            paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.ToString());
+            try
+            {
+                Dictionary<string, object> paramDict = new Dictionary<string, object>();
 
-            //paramDict.Add("@UserId", 1);
-            paramDict.Add("@UserId", this.VwEPRSUser.UserId);
+                paramDict.Add("@ApplicationId", permitApp.ApplicationId);
+                paramDict.Add("@OldPermitNo", permitApp.OldPermitNo.Value);
+                paramDict.Add("@PermitTypeId", permitApp.PermitTypeId);
+                paramDict.Add("@PersonName", permitApp.PersonName);
+                paramDict.Add("@FatherHusbandName", permitApp.FatherHusbandName);
+                paramDict.Add("@Address", permitApp.Address);
+                paramDict.Add("@DateofBirth", permitApp.DateofBirth);
+                paramDict.Add("@CellNo", permitApp.CellNo);
+                paramDict.Add("@City", permitApp.City.ToString());
+                paramDict.Add("@CountryId", permitApp.CountryId.Value);
+                paramDict.Add("@CNIC", permitApp.CNIC.ToString());
+                paramDict.Add("@PassportNo", permitApp.PassportNo.ToString());
+                paramDict.Add("@Nationality", "Christian");
+                paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.ToString());
 
-            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
+                //paramDict.Add("@UserId", 1);
+                paramDict.Add("@UserId", this.VwEPRSUser.UserId);
 
-            return ds;
+                var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
+
+                return ds;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+         
         }
 
 
