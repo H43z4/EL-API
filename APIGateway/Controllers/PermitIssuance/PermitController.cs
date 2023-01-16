@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.StaticFiles;
 using Models.DatabaseModels.VehicleRegistration.Core;
 using Models.DatabaseModels.VehicleRegistration.Setup;
 using Models.ViewModels.Identity;
-using Models.ViewModels.Payment;
 using Models.ViewModels.VehicleRegistration.Core;
 using Models.ViewModels.PermitIssuance.Core;
 using SharedLib.Common;
@@ -19,11 +18,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using UserManagement;
-using VehicleRegistration;
 using PermitIssuance;
 using Models.DatabaseModels.epay;
 using Models.ViewModels.PermitIssuance.Setup;
-using Models.ViewModels.SeriesNumberPool.Core;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace APIGateway.Controllers.PermitIssuance
@@ -34,8 +31,6 @@ namespace APIGateway.Controllers.PermitIssuance
     public class PermitController : ControllerBase
     {
         private readonly IPermitIssuanceService permitIssuanceService;
-        private readonly INRTService nrtService;
-        private readonly ITOService toService;
         private readonly IUserManagement userManagementService;
         private readonly ILoggingService logger;
 
@@ -47,11 +42,9 @@ namespace APIGateway.Controllers.PermitIssuance
             }
         }
 
-        public PermitController(IPermitIssuanceService permitIssuanceService, INRTService nrtService, ITOService toService, IUserManagement userManagementServuce)
+        public PermitController(IPermitIssuanceService permitIssuanceService, IUserManagement userManagementServuce)
         {
             this.permitIssuanceService = permitIssuanceService;
-            this.nrtService = nrtService;
-            this.toService = toService;
             this.userManagementService = userManagementServuce;
         }
 
