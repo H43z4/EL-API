@@ -23,7 +23,7 @@ namespace POS
             //this.adoNet = adoNet;
             this.dbHelper = dbHelper;
         }
-        public async Task<DataSet> SaveConsignment(VwOrderMain orderMain)
+        public async Task<DataSet> SaveVendOrder(VwOrderMain orderMain)
         {
             Dictionary<string, object> paramDict = new Dictionary<string, object>();
 

@@ -41,7 +41,7 @@ namespace APIGateway.Controllers.PointOfSale
             //this.nrtService.VwUser = this.User;
             this.pOSService.VwEPRSUser = this.User;
 
-            DataSet resultData = await this.pOSService.SaveConsignment(orderMain);
+            DataSet resultData = await this.pOSService.SaveVendOrder(orderMain);
             var apiResponseType = ApiResponseType.SUCCESS;
             var msg = Constants.DATA_SAVED_MESSAGE;
             object data;
