@@ -9,7 +9,7 @@ namespace POS
 {
     public interface IPOSService : ICurrentEPRSUser
     {
-        Task<DataSet> SaveConsignment(VwOrderMain orderMain);
+        Task<DataSet> SaveVendOrder(VwOrderMain orderMain);
     }
 
     public class POSService : IPOSService
