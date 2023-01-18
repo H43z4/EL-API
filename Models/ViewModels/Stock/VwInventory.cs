@@ -11,12 +11,15 @@ namespace Models.ViewModels.Stock
     {
         public long StockInApplicationId { get; set; }
         public long OrganisationId { get; set; } // Stock Request Initiated by Organisation to Add Products in his Stock.
+        public string Organization { get; set; }
+
         [Required]
         public long ExcisePassNo { get; set; }
         [Required]
         public DateTime RequestDate { get; set; }
         [Required]
         public string TransportExportNo { get; set; }
+        public string ManufacturerName { get; set; }
         public string DriverName { get; set; }
         [Required]
         public long ConsignmentFromId { get; set; }

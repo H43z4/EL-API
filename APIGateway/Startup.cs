@@ -17,6 +17,7 @@ using APIGateway.Middleware;
 using Wkhtmltopdf.NetCore;
 using Stock;
 using POS;
+using Person;
 
 namespace APIGateway
 {
@@ -103,6 +104,7 @@ namespace APIGateway
             services.AddTransient<IPermitIssuanceService, PermitIssuanceService>();
             services.AddTransient<IInventoryService, InventoryInService>();
             services.AddTransient<IPOSService, POSService>();
+            services.AddTransient<IPersonService, PersonService>();
 
             #endregion
             services.AddStatelessTokenAuthentication();

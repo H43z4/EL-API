@@ -1,4 +1,5 @@
-﻿using Models.DatabaseModels.PermitIssuance.Core;
+﻿using Models.DatabaseModels;
+using Models.DatabaseModels.PermitIssuance.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Models.ViewModels.Stock
 {
-    public class VwInventoryItems
+    public class VwInventoryItems : BaseModel
     {
         public long ApplicationDetailId { get; set; }
         public long StockInApplicationId { get; set; }
@@ -26,7 +27,6 @@ namespace Models.ViewModels.Stock
         public long StrenghtPercentage { get; set; }
         [Required]
         public long ProofGallons { get; set; }
-
         public long ProductDautyRate { get; set; }
     }
 }

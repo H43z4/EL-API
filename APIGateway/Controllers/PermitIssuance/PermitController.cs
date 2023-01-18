@@ -52,46 +52,41 @@ namespace APIGateway.Controllers.PermitIssuance
         [HttpGet]
         public async Task<ApiResponse> GetPermitList()
         {
-            this.permitIssuanceService.VwEPRSUser = this.User;
-            DataSet resultData = await this.permitIssuanceService.GetPermitList();
-            var schedule = resultData.Tables[0];//.ToList<VwPermitIssueApplication>();
+            try
+            {   
+                permitIssuanceService.VwEPRSUser = User;
+                DataSet resultData = await permitIssuanceService.GetPermitList();
+                var lstPermitApplications = resultData.Tables[0].ToList<VwPermitIssueApplication>();
 
-            var apiResponseType = schedule.Rows.Count > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
-            var msg = schedule.Rows.Count > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+                var apiResponseType = lstPermitApplications != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+                var msg = lstPermitApplications != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
-            return ApiResponse.GetApiResponse(apiResponseType, schedule, msg);
+                return ApiResponse.GetApiResponse(apiResponseType, lstPermitApplications, msg);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpGet]
         public async Task<ApiResponse> GetPermitApplicationListById(int id)
         {
-            DataSet resultData = await permitIssuanceService.GetPermitApplicationListById(id);
-
-
-            //var schedule = resultData.Tables[0].ToList<VwPermitIssueApplication>();
-
-            //var apiResponseType = schedule.Count() > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
-            //var msg = schedule.Count() > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
-
-
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data;
-
-            if (resultData.Tables.Count > 0)
+            try
             {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData.Tables[0];//.ToList<VwPermitIssueApplication>();
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+                permitIssuanceService.VwEPRSUser = User;
+                DataSet resultData = await permitIssuanceService.GetPermitApplicationListById(id);
+                var lstPermitApplication = resultData.Tables[0].ToList<VwPermitIssueApplication>();
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+                var apiResponseType = lstPermitApplication != null ? ApiResponseType.SUCCESS : ApiResponseType.FAILED;
+                var msg = lstPermitApplication != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+                return ApiResponse.GetApiResponse(apiResponseType, lstPermitApplication, msg);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         #endregion
 
