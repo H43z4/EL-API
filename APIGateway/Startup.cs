@@ -86,7 +86,6 @@ namespace APIGateway
 
          
 
-            services.AddTransient<IVehicleClassService, VehicleClassService>();
             services.AddTransient(typeof(ISetupservice<>), typeof(SetupService<>));
            
 

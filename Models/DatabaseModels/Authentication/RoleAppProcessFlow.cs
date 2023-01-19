@@ -1,4 +1,4 @@
-﻿using Models.DatabaseModels.VehicleRegistration.Setup;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +15,6 @@ namespace Models.DatabaseModels.Authentication
 
         [ForeignKey("ApplicationProcessFlow")]
         public long AppProcessFlowId { get; set; }
-        public virtual ApplicationProcessFlow ApplicationProcessFlow { get; set; }
+        //public virtual ApplicationProcessFlow ApplicationProcessFlow { get; set; }
     }
 }

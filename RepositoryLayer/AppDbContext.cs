@@ -4,9 +4,6 @@ using Models.DatabaseModels.Authentication;
 using Models.DatabaseModels.Biometric;
 using Models.DatabaseModels.Logging;
 using Models.DatabaseModels.PermitIssuance.Setup;
-using Models.DatabaseModels.SeriesNumberPool;
-using Models.DatabaseModels.VehicleRegistration.Core;
-using Models.DatabaseModels.VehicleRegistration.Setup;
 using Models.DatabaseModels.PermitIssuance.Core;
 using System.Linq;
 
@@ -321,14 +318,7 @@ namespace RepositoryLayer
             #endregion
         }
 
-        #region Profiling
-
-        public DbSet<Address> Address { get; set; }
-        public DbSet<PhoneNumber> PhoneNumber { get; set; }
-        public DbSet<Person> Person { get; set; }
-        public DbSet<Business> Business { get; set; }
-
-        #endregion
+        
 
         #region Authentication
 
@@ -364,108 +354,9 @@ namespace RepositoryLayer
 
         #endregion
 
-        #region Setup
-
-        public DbSet<ApplicationProcessFlow> ApplicationProcessFlow { get; set; }
-        public DbSet<AccountHead> AccountHead { get; set; }
-        public DbSet<BusinessEvent> BusinessEvent { get; set; }
-        public DbSet<BusinessPhase> BusinessPhase { get; set; }
-        public DbSet<BusinessPhaseStatus> BusinessPhaseStatus { get; set; }
-        public DbSet<BusinessProcess> BusinessProcess { get; set; }
-        public DbSet<BusinessTable> BusinessTable { get; set; }
-        public DbSet<BusinessTableAccessLevel> BusinessTableAccessLevel { get; set; }
-        public DbSet<Country> Country { get; set; }
-        public DbSet<District> District { get; set; }
-        public DbSet<OrganizationCategory> OrganizationCategory { get; set; }
-        public DbSet<OwnerStatus> OwnerStatus { get; set; }
-        public DbSet<OwnerTaxGroup> OwnerTaxGroup { get; set; }
-        public DbSet<OwnerTaxGroupFees> OwnerTaxGroupFees { get; set; }
-        public DbSet<OwnerType> OwnerType { get; set; }
-        public DbSet<VehicleBodyConvention> VehicleBodyConvention { get; set; }
-        public DbSet<VehicleBodyType> VehicleBodyType { get; set; }
-        public DbSet<VehicleCategory> VehicleCategory { get; set; }
-        public DbSet<VehicleClass> VehicleClass { get; set; }
-        public DbSet<VehicleClassDetail> VehicleClassDetail { get; set; }
-        public DbSet<VehicleClassification> VehicleClassification { get; set; }
-        public DbSet<VehicleColor> VehicleColor { get; set; }
-        public DbSet<VehicleDocumentType> VehicleDocumentType { get; set; }
-        public DbSet<VehicleDocumentRequirement> VehicleDocumentRequirement { get; set; }
-        public DbSet<VehicleEngineType> VehicleEngineType { get; set; }
-        public DbSet<VehicleFuelType> VehicleFuelType { get; set; }
-        public DbSet<VehicleMake> VehicleMake { get; set; }
-        public DbSet<VehicleMaker> VehicleMaker { get; set; }
-        public DbSet<VehiclePurchaseType> VehiclePurchaseType { get; set; }
-        public DbSet<VehicleRouteType> VehicleRouteType { get; set; }
-        public DbSet<VehicleRCStatus> VehicleRCStatus { get; set; }
-        public DbSet<VehicleStatus> VehicleStatus { get; set; }
-        public DbSet<VehicleType> VehicleType { get; set; }
-        public DbSet<VehicleUsage> VehicleUsage { get; set; }
-        public DbSet<VehicleScheme> VehicleScheme { get; set; }
-
-        public DbSet<Bank> Bank { get; set; }
-        public DbSet<ClearingAgent> ClearingAgent { get; set; }
-        public DbSet<CustomCollectorate> CustomCollectorate { get; set; }
-        public DbSet<Port> Port { get; set; }
-
-        public DbSet<BusinessRepStatus> BusinessRepStatus { get; set; }
-        public DbSet<BusinessSector> BusinessSector { get; set; }
-        public DbSet<BusinessStatus> BusinessStatus { get; set; }
-        public DbSet<BusinessType> BusinessType { get; set; }
-
-
-        public DbSet<TaxBase> TaxBase { get; set; }
-        public DbSet<BusinessProFeeTax> BusinessProFeeTax { get; set; }
-        public DbSet<TaxRate> TaxRate { get; set; }
-        public DbSet<TaxRule> TaxRule { get; set; }
-        public DbSet<TaxType> TaxType { get; set; }
-        public DbSet<RegFeePenaltyRate> RegFeePenaltyRate { get; set; }
-
-        public DbSet<AssessmentStatus> AssessmentStatus { get; set; }
-        public DbSet<ChallanStatus> ChallanStatus { get; set; }
-        public DbSet<ChallanType> ChallanType { get; set; }
-        public DbSet<PaymentMode> PaymentMode { get; set; }
-        public DbSet<PaymentStatus> PaymentStatus { get; set; }
-
-        public DbSet<PermitTypes> PermitTypes { get; set; }
-
         
 
-        #endregion
 
-        #region Core
-
-        public DbSet<Application> Application { get; set; }
-        public DbSet<Owner> Owner { get; set; }
-        public DbSet<OwnerGroup> OwnerGroup { get; set; }
-        public DbSet<Dealer> Dealer { get; set; }
-        public DbSet<Remarks> Remarks { get; set; }
-        public DbSet<Vehicle> Vehicle { get; set; }
-        public DbSet<VehicleOwnershipHistory> VehicleOwnershipHistory { get; set; }
-        public DbSet<VehicleAdditionalInfo> VehicleAdditionalInfo { get; set; }
-        public DbSet<VehicleDocument> VehicleDocument { get; set; }
-        public DbSet<VehiclePurchaseInfo> VehiclePurchaseInfo { get; set; }
-        public DbSet<VehicleImportInfo> VehicleImportInfo { get; set; }
-        public DbSet<VehicleAuctionInfo> VehicleAuctionInfo { get; set; }
-        public DbSet<VehicleBusinessProcessHistory> VehicleBusinessProcessHistory { get; set; }
-        public DbSet<VehicleRegistrationHistory> VehicleRegistrationHistory { get; set; }
-        public DbSet<BusinessRep> BusinessRep { get; set; }
-        public DbSet<HPA> HPA { get; set; }
-        public DbSet<HPAStatusHistory> HPAStatusHistory { get; set; }
-        public DbSet<Keeper> Keeper { get; set; }
-
-        public DbSet<AssessmentBase> AssessmentBase { get; set; }
-        public DbSet<AssessmentDetail> AssessmentDetail { get; set; }
-        public DbSet<Challan> Challan { get; set; }
-        public DbSet<PaymentInfo> Payment { get; set; }
-
-
-        public DbSet<PermitIssueApplication> PermitIssueApplication { get; set; }
-        public DbSet<PermitApplicationDetail> PermitApplicationDetail { get; set; }
-
-        public DbSet<StockInApplication> StockInApplication { get; set; }
-        public DbSet<StockInApplicationDetails> StockInApplicationDetails { get; set; }
-        public DbSet<EPRSPerson> EPRSPerson { get; set; }
-        #endregion
 
         //#region Series-Number-Pool
 
@@ -475,7 +366,6 @@ namespace RepositoryLayer
         //public DbSet<SeriesNumberPool> SeriesNumberPool { get; set; }
         //public DbSet<SeriesStatus> SeriesStatus { get; set; }
         //public DbSet<SeriesType> SeriesType { get; set; }
-        public DbSet<AuctionResult> AuctionResult { get; set; }
 
         //#endregion
 

@@ -1,4 +1,4 @@
-﻿using Models.DatabaseModels.VehicleRegistration.Core;
+﻿//using Models.DatabaseModels.VehicleRegistration.Core;
 using Models.ViewModels.Identity;
 using Models.ViewModels.VehicleRegistration.Core;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using Microsoft.Data.SqlClient;
 using SharedLib.Common;
 using Models.DatabaseModels.PermitIssuance.Setup;
 using Models.DatabaseModels.PermitIssuance.Core;
-using Models.DatabaseModels.VehicleRegistration.Setup;
+//using Models.DatabaseModels.VehicleRegistration.Setup;
 using Models.ViewModels.PermitIssuance.Core;
 using Models.ViewModels.PermitIssuance.Setup;
 

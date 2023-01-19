@@ -1,5 +1,4 @@
-﻿using Models.DatabaseModels.VehicleRegistration.Core;
-using Models.DatabaseModels.VehicleRegistration.Setup;
+﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

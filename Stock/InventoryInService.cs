@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Models.DatabaseModels.epay;
 using Models.DatabaseModels.PermitIssuance.Core;
-using Models.DatabaseModels.VehicleRegistration.Core;
 using Models.ViewModels.Identity;
 using Models.ViewModels.PermitIssuance.Core;
 using Models.ViewModels.PermitIssuance.Setup;
@@ -73,7 +71,7 @@ namespace Stock
                     {
                         Dictionary<string, object> paramDict2 = new Dictionary<string, object>();
 
-                        var item = new StockInApplicationDetails();
+                        //var item = new StockInApplicationDetails();
                         item.StockInApplicationId = Int64.Parse(StockInApplicationId);
 
                         paramDict2.Add("@StockInApplicationId", item.StockInApplicationId);

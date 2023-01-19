@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Models.DatabaseModels.Setup;
-using Models.DatabaseModels.VehicleRegistration.Setup;
+//using Models.DatabaseModels.VehicleRegistration.Setup;
 using Models.ViewModels.VehicleRegistration.Setup;
 using RepositoryLayer;
 
