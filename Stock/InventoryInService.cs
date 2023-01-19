@@ -18,7 +18,7 @@ namespace Stock
         Task<DataSet> GetStockInApplicationList();
         Task<DataSet> GetStockInApplicationListById(int id);
         Task<DataSet> GetProductList();
-        Task<DataSet> GetPersonInfoByCNIC(string cnic); 
+        //Task<DataSet> GetPersonInfoByCNIC(string cnic); 
     }
 
     public class InventoryInService : IInventoryService
@@ -119,15 +119,15 @@ namespace Stock
             return ds;
         }
 
-        public async Task<DataSet> GetPersonInfoByCNIC(string cnic)
-        {
-            Dictionary<string, object> paramDict = new Dictionary<string, object>();
+        //public async Task<DataSet> GetPersonInfoByCNIC(string cnic)
+        //{
+        //    Dictionary<string, object> paramDict = new Dictionary<string, object>();
 
-            paramDict.Add("@CNIC", cnic);
+        //    paramDict.Add("@CNIC", cnic);
 
-            var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetPersonInfoByCNIC]", paramDict);
+        //    var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetPersonInfoByCNIC]", paramDict);
 
-            return ds;
-        }
+        //    return ds;
+        //}
     }
 }

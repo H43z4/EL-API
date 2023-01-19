@@ -2,14 +2,12 @@
 using Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Models.ViewModels.Identity;
-using Models.ViewModels.PermitIssuance.Core;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Models.ViewModels.PermitIssuance.Setup;
 using Models.ViewModels.Stock;
-using Models.ViewModels.VehicleRegistration.Core;
-using PermitIssuance;
 using SharedLib.Common;
 using Stock;
+using System;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -77,100 +75,85 @@ namespace APIGateway.Controllers.Stock
         [HttpGet]
         public async Task<ApiResponse> GetStockInApplicationList()
         {
-            DataSet resultData = await inventoryService.GetStockInApplicationList();
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data;
-
-            if (resultData.Tables.Count > 0)
+            try
             {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData;
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+                inventoryService.VwEPRSUser = User;
+                DataSet resultData = await inventoryService.GetStockInApplicationList();
+                var lstStockInApplications = resultData.Tables[0].ToList<VwInventory>();
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+                var apiResponseType = lstStockInApplications != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+                var msg = lstStockInApplications != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+                return ApiResponse.GetApiResponse(apiResponseType, lstStockInApplications, msg);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpGet]
         public async Task<ApiResponse> GetStockInApplicationListById(int id)
         {
-            DataSet resultData = await inventoryService.GetStockInApplicationListById(id);
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data;
-
-            if (resultData.Tables.Count > 0)
+            try
             {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData;//.ToList<VwInventory>();
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+                inventoryService.VwEPRSUser = User;
+                DataSet resultData = await inventoryService.GetStockInApplicationListById(id);
+                var lstStockInApplication = resultData.Tables[0].ToList<VwInventory>().FirstOrDefault();
+                if (lstStockInApplication != null)
+                {
+                    lstStockInApplication.items = resultData.Tables[1].ToList<VwInventoryItems>();
+                }
+                var apiResponseType = lstStockInApplication != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+                var msg = lstStockInApplication != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+                return ApiResponse.GetApiResponse(apiResponseType, lstStockInApplication, msg);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpGet]
         public async Task<ApiResponse> GetProductList()
         {
-            DataSet resultData = await inventoryService.GetProductList();
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data = null;
-
-            if (resultData.Tables.Count > 0)
+            try
             {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                data = resultData.Tables[0].ToList<VwInventory>();
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+                inventoryService.VwEPRSUser = User;
+                DataSet resultData = await inventoryService.GetProductList();
+                var lstProductList = resultData.Tables[0].ToList<VwProductList>();
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+                var apiResponseType = lstProductList != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+                var msg = lstProductList != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+
+                return ApiResponse.GetApiResponse(apiResponseType, lstProductList, msg);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        [HttpGet]
-        public async Task<ApiResponse> GetPersonInfoByCNIC(string cnic)
-        {
-            DataSet resultData = await inventoryService.GetPersonInfoByCNIC(cnic);
-            var apiResponseType = ApiResponseType.SUCCESS;
-            var msg = Constants.RECORD_FOUND_MESSAGE;
-            object data = null;
+        //[HttpGet]
+        //public async Task<ApiResponse> GetPersonInfoByCNIC(string cnic)
+        //{
+        //    try
+        //    {
+        //        inventoryService.VwEPRSUser = User;
+        //        DataSet resultData = await inventoryService.GetPersonInfoByCNIC(cnic);
+        //        var lstPersonInfo = resultData.Tables[0].ToList<VwEPRSPerson>();
 
-            if (resultData.Tables.Count > 0)
-            {
-                apiResponseType = ApiResponseType.SUCCESS;
-                msg = Constants.RECORD_FOUND_MESSAGE;
-                //data = SharedLib.Common.Extentions.ToList<VwEPRSPerson>(resultData.Tables[0]).FirstOrDefault();
-                data = resultData.Tables[0];
-            }
-            else
-            {
-                apiResponseType = ApiResponseType.FAILED;
-                msg = Constants.NOT_FOUND_MESSAGE;
-                data = null;
-            }
+        //        var apiResponseType = lstPersonInfo != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+        //        var msg = lstPersonInfo != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
-            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
-        }
-
+        //        return ApiResponse.GetApiResponse(apiResponseType, lstPersonInfo, msg);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
         #endregion
     }
 }

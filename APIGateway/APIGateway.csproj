@@ -27,6 +27,7 @@
     <ProjectReference Include="..\Authentication\Authentication.csproj" />
     <ProjectReference Include="..\Logging\Logging.csproj" />
     <ProjectReference Include="..\PermitIssuance\PermitIssuance.csproj" />
+    <ProjectReference Include="..\Person\Person.csproj" />
     <ProjectReference Include="..\POS\POS.csproj" />
     <ProjectReference Include="..\RepositoryLayer\RepositoryLayer.csproj" />
     <ProjectReference Include="..\Setup\Setup.csproj" />

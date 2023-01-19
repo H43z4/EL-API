@@ -9,7 +9,7 @@ namespace Models.ViewModels.Stock
 {
     public class VwProductList
     {
-        public int ProductId { get; set; }
+        public long ProductId { get; set; }
         public string ProductNameWithType { get; set; }
     }
 }
