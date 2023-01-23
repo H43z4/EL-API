@@ -19,6 +19,7 @@ namespace Models.DatabaseModels.PermitIssuance.Core
         //public virtual Country Country { get; set; }
 
         public string? City { get; set; } 
+        public long? CityId { get; set; } 
 
         [Required]
         [StringLength(100)]

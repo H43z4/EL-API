@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.DatabaseModels.EPRSDatabaseObjects.Setup;
 
 namespace Models.DatabaseModels.PermitIssuance.Core
 {
@@ -24,13 +25,22 @@ namespace Models.DatabaseModels.PermitIssuance.Core
         public long PermitNo { get; set; } // Combination of CNIC & ApplicationID
         public long? OldPermitNo { get; set; }
 
-        //[ForeignKey("District")]
+        [ForeignKey("District")]
         public long? DistrictId { get; set; }
-        //public virtual District District { get; set; }
+        public virtual District District { get; set; }
+        
+        [ForeignKey("City")]
+        public long? CityId { get; set; }
+        public virtual City City { get; set; }
+        
+        [ForeignKey("Profession")]
+        public long? ProfessionId { get; set; }
+        public virtual Profession Profession { get; set; }
+
+        public string ProfessionName { get; set; }
 
         [ForeignKey("EPRSPermitTypes")]
         public long PermitTypeId { get; set; }
-
         public virtual EPRSPermitTypes EPRSPermitTypes { get; set; }
 
 
