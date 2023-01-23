@@ -44,7 +44,6 @@
   <ItemGroup>
     <Folder Include="Attachments\Scanned_Documents\" />
     <Folder Include="Controllers\Payment\" />
-    <Folder Include="Controllers\SetupControllers\" />
     <Folder Include="Rotativa\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
