@@ -57,7 +57,10 @@ namespace PermitIssuance
                 paramDict.Add("@Address", permitApp.Address);
                 paramDict.Add("@DateofBirth", permitApp.DateofBirth);
                 paramDict.Add("@CellNo", permitApp.CellNo);
-                paramDict.Add("@City", permitApp.City.ToString());
+                paramDict.Add("@CityId", permitApp.CityId);
+                paramDict.Add("@DistrictId", permitApp.DistrictId);
+                paramDict.Add("@ProfessionId", permitApp.ProfessionId);
+                paramDict.Add("@ProfessionName", permitApp.ProfessionName.ToString());
                 paramDict.Add("@CountryId", permitApp.CountryId.Value);
                 paramDict.Add("@CNIC", permitApp.CNIC.ToString());
                 paramDict.Add("@PassportNo", permitApp.PassportNo.ToString());

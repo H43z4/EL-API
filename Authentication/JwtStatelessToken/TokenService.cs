@@ -148,7 +148,8 @@ namespace Authentication.JwtStatelessToken
             {
                 UserId = (long)vwEPRSUser.UserId,
                 UserName = vwEPRSUser.UserName,
-                Password = vwEPRSUser.Password
+                Password = vwEPRSUser.Password,
+                FullName = vwEPRSUser.FullName
             };
 
             var passwordHasher = new PasswordHasher<EPRSUser>();
@@ -159,7 +160,7 @@ namespace Authentication.JwtStatelessToken
                 return null;
             }
 
-            var fullName = string.Empty;
+            //var fullName = string.Empty;
 
             //if (vwEPRSUser.UserTypeId == 1)
             //{

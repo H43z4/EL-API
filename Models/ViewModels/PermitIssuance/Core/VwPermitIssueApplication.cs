@@ -17,6 +17,10 @@ namespace Models.ViewModels.PermitIssuance.Core
 
         public DateTime CreatedAt { get; set; }
         public string? City { get; set; }
+        public long? CityId { get; set; }
+        public long? DistrictId { get; set; }
+        public string? ProfessionName { get; set; }
+        public long? ProfessionId { get; set; }
 
         [Required]
         [StringLength(100)]

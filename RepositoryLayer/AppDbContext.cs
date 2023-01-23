@@ -215,6 +215,7 @@ namespace RepositoryLayer
             modelBuilder.Entity<Country>().ToTable("Country", "Setup");
             modelBuilder.Entity<District>().ToTable("District", "Setup");
             modelBuilder.Entity<City>().ToTable("City", "Setup");
+            modelBuilder.Entity<Profession>().ToTable("Profession", "Setup");
             //modelBuilder.Entity<Application>().ToTable("Application", "Core");
             //modelBuilder.Entity<ApplicationLog>().ToTable("ApplicationLog", "Core");
             //modelBuilder.Entity<Owner>().ToTable("Owner", "Core");
