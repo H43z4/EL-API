@@ -67,6 +67,7 @@ namespace APIGateway.Controllers
                     token = authenticationResult.Token,
                     authenticationResult.EPRSUser.UserName,
                     authenticationResult.EPRSUser.FullName,
+                    authenticationResult.EPRSUser.OrganizationName,
                     roles = string.Join(" | ", authenticationResult.EPRSUser.UserRoles.Select(x => x.RoleName))
                 };
 

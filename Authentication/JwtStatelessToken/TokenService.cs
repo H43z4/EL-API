@@ -149,7 +149,7 @@ namespace Authentication.JwtStatelessToken
                 UserId = (long)vwEPRSUser.UserId,
                 UserName = vwEPRSUser.UserName,
                 Password = vwEPRSUser.Password,
-                FullName = vwEPRSUser.FullName
+                FullName = vwEPRSUser.FullName,
             };
 
             var passwordHasher = new PasswordHasher<EPRSUser>();
@@ -177,7 +177,7 @@ namespace Authentication.JwtStatelessToken
 
             var roles = ds.Tables[1].ToList<Role>();
 
-            return new VwEPRSUser() { UserId = vwEPRSUser.UserId, UserName = vwEPRSUser.UserName, FullName = vwEPRSUser.FullName, UserRoles = roles };
+            return new VwEPRSUser() { UserId = vwEPRSUser.UserId, UserName = vwEPRSUser.UserName,OrganizationName = vwEPRSUser.OrganizationName, FullName = vwEPRSUser.FullName, UserRoles = roles };
         }
 
         private AuthenticationTicket GetAuthenticationTicket(Claim[] claims)
