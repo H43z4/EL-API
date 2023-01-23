@@ -1,15 +1,22 @@
-﻿//using Models.DatabaseModels.VehicleRegistration.Core;
+﻿using Models.DatabaseModels.Biometric;
 using Models.DatabaseModels.PermitIssuance.Core;
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Models.DatabaseModels.Biometric
+namespace Models.DatabaseModels.EPRSDatabaseObjects.Core
 {
-    public class BiometricVerification : BaseModel
+    public class BiometricRecords:BaseModel
     {
         [Key]
+        public long BiometricRecordId { get; set; }
+        [ForeignKey("BiometricVerification")]
         public long BiometricVerificationId { get; set; }
+        public virtual BiometricVerification Biometric { get; set; }
 
         [ForeignKey("Application")]
         public long ApplicationId { get; set; }
@@ -29,8 +36,6 @@ namespace Models.DatabaseModels.Biometric
 
         public long? NadraTransId { get; set; }
         public bool? IsVerified { get; set; }
-        public bool? IsExpired { get; set; }
         public DateTime? VerificationReportedOn { get; set; }
-        public DateTime? VerificationExpiry { get; set; }
     }
 }

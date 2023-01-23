@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepositoryLayer;
 
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230120064211_EPRS")]
+    partial class EPRS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -739,12 +741,6 @@ namespace RepositoryLayer.Migrations
                     b.Property<bool>("IsBuyer")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsExpired")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRep")
-                        .HasColumnType("bit");
-
                     b.Property<bool?>("IsVerified")
                         .HasColumnType("bit");
 
@@ -765,9 +761,6 @@ namespace RepositoryLayer.Migrations
 
                     b.Property<long?>("PersonId")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("VerificationExpiry")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("VerificationReportedOn")
                         .HasColumnType("datetime2");
@@ -820,295 +813,6 @@ namespace RepositoryLayer.Migrations
                     b.HasKey("NadraFranchiseId");
 
                     b.ToTable("NadraFranchise");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Core.BiometricRecords", b =>
-                {
-                    b.Property<long>("BiometricRecordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("ApplicationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("BiometricVerificationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsBuyer")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRep")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsVerified")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("NadraFranchiseId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("NadraTransId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("PersonCNIC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("VerificationReportedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("BiometricRecordId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.HasIndex("BiometricVerificationId");
-
-                    b.HasIndex("NadraFranchiseId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("BiometricRecords");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Core.PersonDocuments", b =>
-                {
-                    b.Property<long>("DocumentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("ApplicationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("DocumentDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DocumentName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DocumentPath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DocumentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("DocumentId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("PersonDocuments", "Core");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Core.Representative", b =>
-                {
-                    b.Property<long>("RepId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("ApplicationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool?>("IsVerified")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("OldCNIC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OldName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("VerificationReportedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("newCNIC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("newName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RepId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("Representative", "Core");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Setup.City", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("City", "Setup");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Setup.Country", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Country", "Setup");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Setup.District", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<long>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("ModifiedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("District", "Setup");
                 });
 
             modelBuilder.Entity("Models.DatabaseModels.Logging.HttpRequestLog", b =>
@@ -2263,75 +1967,6 @@ namespace RepositoryLayer.Migrations
                     b.Navigation("Application");
 
                     b.Navigation("NadraFranchise");
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Core.BiometricRecords", b =>
-                {
-                    b.HasOne("Models.DatabaseModels.PermitIssuance.Core.PermitIssueApplication", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Models.DatabaseModels.Biometric.BiometricVerification", "Biometric")
-                        .WithMany()
-                        .HasForeignKey("BiometricVerificationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Models.DatabaseModels.Biometric.NadraFranchise", "NadraFranchise")
-                        .WithMany()
-                        .HasForeignKey("NadraFranchiseId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("Models.DatabaseModels.PermitIssuance.Core.EPRSPerson", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Application");
-
-                    b.Navigation("Biometric");
-
-                    b.Navigation("NadraFranchise");
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Core.PersonDocuments", b =>
-                {
-                    b.HasOne("Models.DatabaseModels.PermitIssuance.Core.PermitIssueApplication", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Models.DatabaseModels.PermitIssuance.Core.EPRSPerson", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Application");
-
-                    b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Models.DatabaseModels.EPRSDatabaseObjects.Core.Representative", b =>
-                {
-                    b.HasOne("Models.DatabaseModels.PermitIssuance.Core.PermitIssueApplication", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Models.DatabaseModels.PermitIssuance.Core.EPRSPerson", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Application");
 
                     b.Navigation("Person");
                 });

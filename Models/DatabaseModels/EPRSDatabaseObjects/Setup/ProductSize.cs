@@ -20,7 +20,7 @@ namespace Models.DatabaseModels.PermitIssuance.Setup
         public long? ProductTypeId { get; set; }
         public virtual ProductType ProductType { get; set; }
 
-        public decimal? QuantityInML { get; set; }
+        public float QuantityInML { get; set; }
 
         public long ProductQtyforOneUnit { get; set; }
 

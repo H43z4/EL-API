@@ -6,6 +6,8 @@ using Models.DatabaseModels.Logging;
 using Models.DatabaseModels.PermitIssuance.Setup;
 using Models.DatabaseModels.PermitIssuance.Core;
 using System.Linq;
+using Models.DatabaseModels.EPRSDatabaseObjects.Core;
+using Models.DatabaseModels.EPRSDatabaseObjects.Setup;
 
 namespace RepositoryLayer
 {
@@ -64,10 +66,10 @@ namespace RepositoryLayer
 
             #region Logs
 
-            //modelBuilder.Entity<HttpRequestLog>().ToTable("HttpRequestLog", "Logs");
-            //modelBuilder.Entity<SqlExceptionLog>().ToTable("SqlExceptionLog", "Logs");
-            ////modelBuilder.Entity<Log>().ToTable("Logs", "Logs");
-            ////modelBuilder.Entity<RequestLog>().ToTable("RequestLog", "Logs");
+            modelBuilder.Entity<HttpRequestLog>().ToTable("HttpRequestLog", "Logs");
+            modelBuilder.Entity<SqlExceptionLog>().ToTable("SqlExceptionLog", "Logs");
+            //modelBuilder.Entity<Log>().ToTable("Logs", "Logs");
+            //modelBuilder.Entity<RequestLog>().ToTable("RequestLog", "Logs");
 
             #endregion
 
@@ -208,6 +210,11 @@ namespace RepositoryLayer
             modelBuilder.Entity<StockInApplicationDetails>().ToTable("StockInApplicationDetails", "Core");
             modelBuilder.Entity<OrderMain>().ToTable("OrderMain", "Core");
             modelBuilder.Entity<OrderDetail>().ToTable("OrderDetail", "Core");
+            modelBuilder.Entity<Representative>().ToTable("Representative", "Core");
+            modelBuilder.Entity<PersonDocuments>().ToTable("PersonDocuments", "Core");
+            modelBuilder.Entity<Country>().ToTable("Country", "Setup");
+            modelBuilder.Entity<District>().ToTable("District", "Setup");
+            modelBuilder.Entity<City>().ToTable("City", "Setup");
             //modelBuilder.Entity<Application>().ToTable("Application", "Core");
             //modelBuilder.Entity<ApplicationLog>().ToTable("ApplicationLog", "Core");
             //modelBuilder.Entity<Owner>().ToTable("Owner", "Core");
@@ -373,6 +380,7 @@ namespace RepositoryLayer
 
         public DbSet<NadraFranchise> NadraFranchise { get; set; }
         public DbSet<BiometricVerification> BiometricVerification { get; set; }
+        public DbSet<BiometricRecords> BiometricRecords { get; set; }
 
         #endregion
     }

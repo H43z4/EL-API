@@ -38,7 +38,7 @@ namespace Models.DatabaseModels.PermitIssuance.Setup
 
         public DateTime? ProductPriceEffectiveDate { get; set; }
 
-        public decimal? ProductVendFee { get; set; }
+        public float ProductVendFee { get; set; }
 
 
 
