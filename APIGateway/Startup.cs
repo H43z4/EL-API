@@ -104,7 +104,7 @@ namespace APIGateway
             services.AddTransient<IInventoryService, InventoryInService>();
             services.AddTransient<IPOSService, POSService>();
             services.AddTransient<IPersonService, PersonService>();
-
+            services.AddTransient<ILovService, LovService>();
             #endregion
             services.AddStatelessTokenAuthentication();
 
