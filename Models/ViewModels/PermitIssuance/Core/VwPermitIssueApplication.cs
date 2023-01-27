@@ -47,5 +47,7 @@ namespace Models.ViewModels.PermitIssuance.Core
         public string SponsorPersonCNIC { get; set; }
         public string SponsorPersonName { get; set; }
         public long? SponsorTypeID { get; set; }
+        public string RowTimeline { get; set; }
+
     }
 }

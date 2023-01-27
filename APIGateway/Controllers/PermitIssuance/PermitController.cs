@@ -57,7 +57,40 @@ namespace APIGateway.Controllers.PermitIssuance
                 permitIssuanceService.VwEPRSUser = User;
                 DataSet resultData = await permitIssuanceService.GetPermitList();
                 var lstPermitApplications = resultData.Tables[0].ToList<VwPermitIssueApplication>();
+                if (lstPermitApplications.Count>0)
+                {
+                    foreach (var item in lstPermitApplications)
+                    {
+                        DateTime date1 = item.CreatedAt;
+                        DateTime date2 = DateTime.Now;
+                        TimeSpan diff = date2 - date1;
+                        double diffHours = diff.TotalHours; 
+                        if (diffHours < 24)
+                        {
+                            item.RowTimeline = "less24";
 
+                            // inputField.classList.add("less24");
+                        }
+                        else if (diffHours > 24 && diffHours < 48)
+                        {
+                            item.RowTimeline = "hours24";
+
+                            // inputField.classList.add("hours24");
+                        }
+                        else if (diffHours > 24 && diffHours > 48 && diffHours < 72)
+                        {
+                            item.RowTimeline = "hours48";
+
+                            // inputField.classList.add("hours48");
+                        }
+                        else
+                        {
+                            item.RowTimeline = "hours72";
+
+                            // inputField.classList.add("hours72");
+                        }
+                    }
+                }
                 var apiResponseType = lstPermitApplications != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
                 var msg = lstPermitApplications != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
