@@ -64,9 +64,13 @@ namespace PermitIssuance
                 paramDict.Add("@CountryId", permitApp.CountryId.Value);
                 paramDict.Add("@CNIC", permitApp.CNIC.ToString());
                 paramDict.Add("@PassportNo", permitApp.PassportNo.ToString());
-                paramDict.Add("@Nationality", "Christian");
+                paramDict.Add("@Nationality", permitApp.Nationality /*"Christian"*/);
                 paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.ToString());
-
+                paramDict.Add("@SponsorCompanyNTN,", permitApp.SponsorCompanyNTN);
+                paramDict.Add("@SponsorCompanyName,", permitApp.SponsorCompanyName);
+                paramDict.Add("@SponsorPersonCNIC,", permitApp.SponsorPersonCNIC);
+                paramDict.Add("@SponsorPersonName,", permitApp.SponsorPersonName);
+                paramDict.Add("@SponsorTypeID", permitApp.SponsorTypeID.HasValue ? permitApp.SponsorTypeID : null);
                 //paramDict.Add("@UserId", 1);
                 paramDict.Add("@UserId", this.VwEPRSUser.UserId);
 

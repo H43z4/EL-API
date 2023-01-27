@@ -42,5 +42,10 @@ namespace Models.ViewModels.PermitIssuance.Core
         public long? OldPermitNo { get; set; }
 
         public long PermitTypeId { get; set; }
+        public string SponsorCompanyNTN { get; set; }
+        public string SponsorCompanyName { get; set; }
+        public string SponsorPersonCNIC { get; set; }
+        public string SponsorPersonName { get; set; }
+        public long? SponsorTypeID { get; set; }
     }
 }
