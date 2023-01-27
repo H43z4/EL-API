@@ -10,6 +10,9 @@ using Models.ViewModels.PermitIssuance.Setup;
 using Person;
 using PermitIssuance;
 using UserManagement;
+using Models.ViewModels.PermitIssuance.Core;
+using Models.ViewModels.Documents;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace APIGateway.Controllers.Person
 {
@@ -43,8 +46,8 @@ namespace APIGateway.Controllers.Person
                 DataSet resultData = await personService.GetPersonInfoByCNIC(cnic);
                 var lstPersonInfo = resultData.Tables[0].ToList<VwEPRSPerson>();
 
-                var apiResponseType = lstPersonInfo != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
-                var msg = lstPersonInfo != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
+                var apiResponseType = lstPersonInfo.Count > 0 ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
+                var msg = lstPersonInfo.Count > 0 ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
                 return ApiResponse.GetApiResponse(apiResponseType, lstPersonInfo, msg);
             }
@@ -52,6 +55,39 @@ namespace APIGateway.Controllers.Person
             {
                 throw;
             }
+        }
+        #endregion
+
+        #region POST-APIs
+        [HttpPost]
+        public async Task<ApiResponse> SavePersonDocument(VwPersonDocument personDocument)
+        {
+
+            personService.VwEPRSUser = User;
+
+            DataSet resultData = await this.personService.SavePersonDocument(personDocument);
+            object data;
+            var apiResponseType = ApiResponseType.SUCCESS;
+            var msg = Constants.DATA_SAVED_MESSAGE;
+
+            if (resultData.Tables.Count > 0)
+            {
+                apiResponseType = ApiResponseType.SUCCESS;
+                msg = Constants.DATA_SAVED_MESSAGE;
+                data = new
+                {
+                    DocumentId = resultData.Tables[0].Rows[0][0].ToString()
+                };
+
+            }
+            else
+            {
+                apiResponseType = ApiResponseType.FAILED;
+                msg = Constants.DATA_NOT_SAVED_MESSAGE;
+                data = null;
+            }
+
+            return ApiResponse.GetApiResponse(apiResponseType, data, msg);
         }
         #endregion
     }
