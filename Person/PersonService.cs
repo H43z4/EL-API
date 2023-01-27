@@ -45,7 +45,6 @@ namespace Person
             {
                 Dictionary<string, object> paramDict = new Dictionary<string, object>();
 
-                paramDict.Add("@DocumentId", personDocument.DocumentId);
                 paramDict.Add("@DocumentName", personDocument.DocumentName);
                 paramDict.Add("@DocumentType", personDocument.DocumentType);
                 paramDict.Add("@DocumentDescription", personDocument.DocumentDescription);
@@ -55,7 +54,7 @@ namespace Person
                 paramDict.Add("@CreatedAt", DateTime.Now);
                 paramDict.Add("@CreatedBy", VwEPRSUser.UserId);
 
-                var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePermitApplication]", paramDict);
+                var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePersonDocument]", paramDict);
 
                 return ds;
             }
