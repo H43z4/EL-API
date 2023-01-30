@@ -13,6 +13,8 @@ using UserManagement;
 using Models.ViewModels.PermitIssuance.Core;
 using Models.ViewModels.Documents;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.IO;
+using System.Net.Http.Headers;
 
 namespace APIGateway.Controllers.Person
 {
@@ -88,6 +90,60 @@ namespace APIGateway.Controllers.Person
             }
 
             return ApiResponse.GetApiResponse(apiResponseType, data, msg);
+        }
+        [HttpPost, DisableRequestSizeLimit]
+        public async Task<IActionResult> Upload()
+        {
+            try
+            {
+                var formCollection = await Request.ReadFormAsync();
+                var file = formCollection.Files.First();
+                var folderName = Path.Combine("Attachments", "ConsumerPhotos");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if (!Directory.Exists(folderName))
+                {
+                    Directory.CreateDirectory(folderName);
+                }
+                if (file.Length > 0)
+                {
+                    Guid newName = Guid.NewGuid();
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    fileName = newName + "_" + fileName;
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    var applicationIdIndex = fileName.LastIndexOf("_");
+                    var applicationId = "";
+                    if (applicationIdIndex != -1)
+                    {
+                        string[] parts = fileName.Split('_');
+                        applicationId = parts[parts.Length - 1];
+                        var personDocs = new VwPersonDocument();
+
+                        personDocs.DocumentId = 0;
+                        personDocs.DocumentName = fileName;
+                        personDocs.DocumentDescription = "Person Photo";
+                        personDocs.DocumentPath = fullPath;
+                        personDocs.DocumentType = "Photo";
+                        personDocs.ApplicationId = Int64.Parse(applicationId);
+                        personDocs.PersonId = 0;
+                        await SavePersonDocument(personDocs);
+
+                    }
+                    return Ok(new { dbPath});
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex}");
+            }
         }
         #endregion
     }

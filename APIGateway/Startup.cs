@@ -18,6 +18,10 @@ using Wkhtmltopdf.NetCore;
 using Stock;
 using POS;
 using Person;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace APIGateway
 {
@@ -122,6 +126,12 @@ namespace APIGateway
                 o.InvalidModelStateResponseFactory = actionContext =>
                     new BadRequestObjectResult(ApiResponse.GetValidationErrorResponse(ApiResponseType.VALIDATION_ERROR, actionContext.ModelState.Values.SelectMany(v => v.Errors).Select(x => x.ErrorMessage), null, null, null));
             });
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -149,7 +159,11 @@ namespace APIGateway
             });
 
             app.UseStaticFiles();
-
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Attachments")),
+                RequestPath = new PathString("/Attachments")
+            });
             app.UseRouting();
 
             //app.Use(async (context, next) =>
