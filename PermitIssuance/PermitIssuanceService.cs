@@ -50,22 +50,22 @@ namespace PermitIssuance
                 Dictionary<string, object> paramDict = new Dictionary<string, object>();
 
                 paramDict.Add("@ApplicationId", permitApp.ApplicationId);
-                paramDict.Add("@OldPermitNo", permitApp.OldPermitNo.Value);
+                paramDict.Add("@OldPermitNo", permitApp.OldPermitNo.HasValue ? permitApp.OldPermitNo.Value : null);
                 paramDict.Add("@PermitTypeId", permitApp.PermitTypeId);
                 paramDict.Add("@PersonName", permitApp.PersonName);
                 paramDict.Add("@FatherHusbandName", permitApp.FatherHusbandName);
                 paramDict.Add("@Address", permitApp.Address);
                 paramDict.Add("@DateofBirth", permitApp.DateofBirth);
                 paramDict.Add("@CellNo", permitApp.CellNo);
-                paramDict.Add("@CityId", permitApp.CityId.HasValue ? permitApp.CityId : null);
-                paramDict.Add("@DistrictId", permitApp.DistrictId.HasValue ? permitApp.DistrictId : null);
-                paramDict.Add("@ProfessionId", permitApp.ProfessionId);
+                paramDict.Add("@CityId", permitApp.CityId.HasValue ? permitApp.CityId.Value : null);
+                paramDict.Add("@DistrictId", permitApp.DistrictId.HasValue ? permitApp.DistrictId.Value : null);
+                paramDict.Add("@ProfessionId", permitApp.ProfessionId.HasValue ? permitApp.ProfessionId.Value : null);
                 paramDict.Add("@ProfessionName", permitApp.ProfessionName.ToString());
                 paramDict.Add("@CountryId", permitApp.CountryId.HasValue ? permitApp.CountryId : null);
                 paramDict.Add("@CNIC", permitApp.CNIC);
                 paramDict.Add("@PassportNo", permitApp.PassportNo);
                 paramDict.Add("@Nationality", permitApp.Nationality /*"Christian"*/);
-                paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.ToString());
+                paramDict.Add("@VisaExpiryDate", permitApp.VisaExpiryDate.HasValue ? permitApp.VisaExpiryDate.ToString() : null);
                 paramDict.Add("@SponsorCompanyNTN", permitApp.SponsorCompanyNTN);
                 paramDict.Add("@SponsorCompanyName", permitApp.SponsorCompanyName);
                 paramDict.Add("@SponsorPersonCNIC", permitApp.SponsorPersonCNIC);
