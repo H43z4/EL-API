@@ -17,8 +17,10 @@ namespace Models.ViewModels.Stock
         public virtual StockInApplication StockInApplication { get; set; }
         [Required]
         public long ProductId { get; set; }
+        public string ProductName { get; set; }
         [Required]
         public long BottleSizeId { get; set; }
+        public string BottleSize { get; set; }
         [Required]
         public long Quantity { get; set; }
         [Required]

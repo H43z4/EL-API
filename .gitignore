@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 *.json
 /TravelAgency/wwwroot/Attachments/doctor-033.jpg
+/APIGateway/Attachments/ConsumerPhotos
