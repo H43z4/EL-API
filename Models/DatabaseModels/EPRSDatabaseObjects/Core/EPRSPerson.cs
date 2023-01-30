@@ -27,8 +27,6 @@ namespace Models.DatabaseModels.PermitIssuance.Core
 
         [StringLength(100)]
         public string FatherHusbandName { get; set; }
-
-        [StringLength(200)]
         public string Address { get; set; }
         public DateTime DateofBirth { get; set; }
         public string CellNo { get; set; }
