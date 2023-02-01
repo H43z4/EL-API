@@ -50,21 +50,22 @@ namespace APIGateway.Controllers.PermitIssuance
 
         #region GET-APIs
         [HttpGet]
-        public async Task<ApiResponse> GetPermitList()
+        public async Task<ApiResponse> GetPermitList(int? hours = null)
         {
             try
             {   
                 permitIssuanceService.VwEPRSUser = User;
                 DataSet resultData = await permitIssuanceService.GetPermitList();
                 var lstPermitApplications = resultData.Tables[0].ToList<VwPermitIssueApplication>();
-                if (lstPermitApplications.Count>0)
+                if (lstPermitApplications.Count > 0)
                 {
                     foreach (var item in lstPermitApplications)
                     {
                         DateTime date1 = item.CreatedAt;
                         DateTime date2 = DateTime.Now;
                         TimeSpan diff = date2 - date1;
-                        double diffHours = diff.TotalHours; 
+                        double diffHours = diff.TotalHours;
+                        
                         if (diffHours < 24)
                         {
                             item.RowTimeline = "less24";
