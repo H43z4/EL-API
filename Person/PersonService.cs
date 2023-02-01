@@ -1,4 +1,5 @@
-﻿using Models.ViewModels.Documents;
+﻿using Models.DatabaseModels.EPRSDatabaseObjects.Core;
+using Models.ViewModels.Documents;
 using Models.ViewModels.PermitIssuance.Core;
 using Models.ViewModels.PermitIssuance.Setup;
 using RepositoryLayer;
@@ -11,6 +12,7 @@ namespace Person
     {
         Task<DataSet> GetPersonInfoByCNIC(string cnic);
         Task<DataSet> SavePersonDocument(VwPersonDocument personDocument);
+        Task<DataSet> GetPersonImage(long applicationId);
     }
     public class PersonService : IPersonService
     {
@@ -55,6 +57,25 @@ namespace Person
                 paramDict.Add("@CreatedBy", VwEPRSUser.UserId);
 
                 var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[SavePersonDocument]", paramDict);
+
+                return ds;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<DataSet> GetPersonImage(long applicationId)
+        {
+            try
+            {
+                Dictionary<string, object> paramDict = new Dictionary<string, object>();
+                paramDict.Add("@ApplicationId", applicationId);
+                paramDict.Add("@DocumentType", "Photo");
+
+                var ds = await this.dbHelper.GetDataSetByStoredProcedure("[Core].[GetPersonImage]", paramDict);
 
                 return ds;
             }

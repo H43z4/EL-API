@@ -120,19 +120,19 @@ namespace APIGateway.Controllers.Person
                 {
                     Guid newName = Guid.NewGuid();
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    fileName = newName + "_" + fileName;
+                    fileName = fileName + "_" + newName;
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var dbPath = Path.Combine(folderName, fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
-                    var applicationIdIndex = fileName.LastIndexOf("_");
+                    var applicationIdIndex = fileName.IndexOf("_");
                     var applicationId = "";
                     if (applicationIdIndex != -1)
                     {
                         string[] parts = fileName.Split('_');
-                        applicationId = parts[parts.Length - 1];
+                        applicationId = parts[0];
                         var personDocs = new VwPersonDocument();
 
                         personDocs.DocumentId = 0;
@@ -155,6 +155,26 @@ namespace APIGateway.Controllers.Person
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex}");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ApiResponse> GetPersonImage(long applicationId)
+        {
+            try
+            {
+                personService.VwEPRSUser = User;
+                DataSet resultData = await personService.GetPersonImage(applicationId);
+                var personImage = resultData.Tables[0].Rows.Count > 0 ? resultData.Tables[0].Rows[0][0].ToString() : null;
+
+                var apiResponseType = string.IsNullOrWhiteSpace(personImage) ? ApiResponseType.NOT_FOUND : ApiResponseType.SUCCESS;
+                var msg = string.IsNullOrWhiteSpace(personImage) ? Constants.NOT_FOUND_MESSAGE : Constants.RECORD_FOUND_MESSAGE;
+
+                return ApiResponse.GetApiResponse(apiResponseType, personImage, msg);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         #endregion
