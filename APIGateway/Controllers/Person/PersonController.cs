@@ -120,19 +120,19 @@ namespace APIGateway.Controllers.Person
                 {
                     Guid newName = Guid.NewGuid();
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    fileName = fileName + "_" + newName;
+                    fileName = newName + "_" + fileName;
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var dbPath = Path.Combine(folderName, fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
-                    var applicationIdIndex = fileName.IndexOf("_");
+                    var applicationIdIndex = fileName.LastIndexOf("_");
                     var applicationId = "";
                     if (applicationIdIndex != -1)
                     {
                         string[] parts = fileName.Split('_');
-                        applicationId = parts[0];
+                        applicationId = parts[1];
                         var personDocs = new VwPersonDocument();
 
                         personDocs.DocumentId = 0;
