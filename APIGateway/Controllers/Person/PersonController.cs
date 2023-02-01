@@ -158,25 +158,25 @@ namespace APIGateway.Controllers.Person
             }
         }
 
-        [HttpPost]
-        public async Task<ApiResponse> GetPersonImage(long applicationId)
-        {
-            try
-            {
-                personService.VwEPRSUser = User;
-                DataSet resultData = await personService.GetPersonImage(applicationId);
-                var personImage = resultData.Tables[0].Rows.Count > 0 ? resultData.Tables[0].Rows[0][0].ToString() : null;
+        //[HttpPost]
+        //public async Task<ApiResponse> GetPersonImage(long applicationId)
+        //{
+        //    try
+        //    {
+        //        personService.VwEPRSUser = User;
+        //        DataSet resultData = await personService.GetPersonImage(applicationId);
+        //        var personImage = resultData.Tables[0].Rows.Count > 0 ? resultData.Tables[0].Rows[0][0].ToString() : null;
 
-                var apiResponseType = string.IsNullOrWhiteSpace(personImage) ? ApiResponseType.NOT_FOUND : ApiResponseType.SUCCESS;
-                var msg = string.IsNullOrWhiteSpace(personImage) ? Constants.NOT_FOUND_MESSAGE : Constants.RECORD_FOUND_MESSAGE;
+        //        var apiResponseType = string.IsNullOrWhiteSpace(personImage) ? ApiResponseType.NOT_FOUND : ApiResponseType.SUCCESS;
+        //        var msg = string.IsNullOrWhiteSpace(personImage) ? Constants.NOT_FOUND_MESSAGE : Constants.RECORD_FOUND_MESSAGE;
 
-                return ApiResponse.GetApiResponse(apiResponseType, personImage, msg);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //        return ApiResponse.GetApiResponse(apiResponseType, personImage, msg);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
         #endregion
     }
 }
