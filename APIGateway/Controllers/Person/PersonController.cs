@@ -105,6 +105,9 @@ namespace APIGateway.Controllers.Person
         {
             try
             {
+                var currentYear = DateTime.Now.Year;
+                var currentMonth = DateTime.Now.Month;
+                var currentDay = DateTime.Now.Day;
                 var formCollection = await Request.ReadFormAsync();
                 var file = formCollection.Files.First();
                 var folderName = Path.Combine("Attachments", "ConsumerPhotos");
