@@ -22,6 +22,7 @@ using PermitIssuance;
 //using Models.DatabaseModels.epay;
 using Models.ViewModels.PermitIssuance.Setup;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.Runtime.ConstrainedExecution;
 
 namespace APIGateway.Controllers.PermitIssuance
 {
@@ -53,7 +54,7 @@ namespace APIGateway.Controllers.PermitIssuance
         public async Task<ApiResponse> GetPermitList(int? hours = null)
         {
             try
-            {   
+            {
                 permitIssuanceService.VwEPRSUser = User;
                 DataSet resultData = await permitIssuanceService.GetPermitList();
                 var lstPermitApplications = resultData.Tables[0].ToList<VwPermitIssueApplication>();
@@ -65,7 +66,7 @@ namespace APIGateway.Controllers.PermitIssuance
                         DateTime date2 = DateTime.Now;
                         TimeSpan diff = date2 - date1;
                         double diffHours = diff.TotalHours;
-                        
+
                         if (diffHours < 24)
                         {
                             item.RowTimeline = "less24";
@@ -92,6 +93,20 @@ namespace APIGateway.Controllers.PermitIssuance
                         }
                     }
                 }
+
+                if (hours.HasValue && hours.Value == 23)
+                {
+                    lstPermitApplications = lstPermitApplications.Where(x => x.RowTimeline == "less24").ToList();
+                }
+                else if (hours.HasValue && (hours.Value == 24 || hours.Value == 48 || hours.Value == 72))
+                {
+                    lstPermitApplications = lstPermitApplications.Where(x => x.RowTimeline == ("hours" + hours.Value.ToString())).ToList();
+                }
+                else if (hours.HasValue)
+                {
+                    lstPermitApplications = new List<VwPermitIssueApplication>();
+                }
+
                 var apiResponseType = lstPermitApplications != null ? ApiResponseType.SUCCESS : ApiResponseType.NOT_FOUND;
                 var msg = lstPermitApplications != null ? Constants.RECORD_FOUND_MESSAGE : Constants.NOT_FOUND_MESSAGE;
 
